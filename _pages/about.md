@@ -10,7 +10,7 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Munich, Germany</p>
-    <p>samet (dot) kocbay (at) tum (dot) de</p>
+    <p><code>samet (dot) kocbay (at) tum (dot) de</code></p>
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
