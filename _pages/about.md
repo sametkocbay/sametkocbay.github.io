@@ -22,4 +22,4 @@ I am a graduate student in Computational Science and Engineering at the Technica
 
 My research interests lie at the intersection of **numerical methods, high-performance computing, and machine learning**. In particular, I am interested in developing machine learning-based approaches for scientific computing, including surrogate modeling, physics-informed learning, and data-driven acceleration of simulation pipelines.  
 
-Previously, I received my B.Sc. in Mechanical Engineering from the Karlsruhe Institute of Technology, where I focused on computational methods in fluid mechanics and thermodynamics.  
+Previously, I received my B.Sc. in Mechanical Engineering from the Karlsruhe Institute of Technology, where I focused on computational methods in fluid mechanics.  
