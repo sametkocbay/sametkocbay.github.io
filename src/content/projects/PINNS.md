@@ -1,23 +1,23 @@
 ---
 title: "Physics Informed Neural Networks"
-description: "Researched and implemented a physics-informed neural network for inverse Navier–Stokes problems."
+description: "Early research on PINNs for inverse Navier–Stokes problems and geometry optimization."
 date: 2023-06-01
 featured: true
-tags: ["Fluid Dynamics", "CFD", "Machine Learning"]
+tags: ["Fluid Dynamics", "CFD", "Machine Learning", "PINNs"]
 image: "/images/projects/PINNS.jpg"
 links:
   #website: "https://www.ka-raceing.de/"
 ---
 
-Head of Aerodynamics for KA RaceIng, guiding the development of high-performance electric racing vehicles after contributing as a design engineer in previous seasons.
+During my Bachelor's studies, I explored **Physics-Informed Neural Networks (PINNs)** as an introduction to scientific machine learning and inverse problems in fluid dynamics.
 
-## Highlights
+The project focused on training a PINN to model **pinhole flow governed by the Navier–Stokes equations**, with the long-term goal of enabling geometry optimization based on learned physical constraints.
 
-### Leadership & Strategy
-- **Team Management:** Led a team of 13 engineers, overseeing the complete aerodynamic design lifecycle, lightweight structure development, and CFD analysis.
-- **Project Execution:** Maintained team motivation and operational efficiency within a high-pressure competition environment.
+## Key Focus Areas
 
-### Technical Contributions
-- **Aerodynamics:** Designed rear-wing geometry integrated with autonomous sensor housing and analyzed complex fan-induced flows using the Moving Reference Frame (MRF) method.
-- **Monocoque & FEM:** Optimized the carbon monocoque structure through multi-stage optimization to balance mass efficiency.
-- **Manufacturing:** Enhanced manufacturing precision by implementing a laser projection system for optimized ply placement in chassis molds.
+- Implemented a PINN framework to solve inverse Navier–Stokes problems.
+- Investigated the influence of different boundary conditions (Dirichlet, Neumann, mixed) on training stability and solution accuracy.
+- Analyzed convergence behavior and loss-term balancing between data fidelity and physics constraints.
+- Evaluated the feasibility of using PINNs for subsequent geometry optimization tasks.
+
+This project served as an early foundation in combining **fluid mechanics, numerical methods, and deep learning**, and sparked my continued interest in physics-based machine learning.
