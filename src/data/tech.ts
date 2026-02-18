@@ -13,6 +13,10 @@ export const techGroups: TechGroup[] = [
     items: ['Python', 'C++', 'Jax', 'OpenMP', 'MPI', 'SYCL (GPU)']
   },
   {
+    title: 'Modalities',
+    items: ['Text', 'Vision', '4D Radar', '3D Vision', 'Lidar', 'IMU', 'Physics Signals', 'Graphs', 'Time Series']
+  },
+  {
     title: 'Tools / Systems',
     items: ['Git', 'Matlab', 'Slurm', 'Linux']
   },

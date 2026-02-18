@@ -4,5 +4,8 @@ export const profileDetails = {
     'German (Native tongue)',
     'Turkish',
   ],
+  certificates: [
+    ''
+  ],
   passions: ['Olympic Wrestling', "Cycling", 'Hiking/Climbing']
 };
