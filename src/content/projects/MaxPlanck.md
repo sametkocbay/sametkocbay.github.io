@@ -1,10 +1,10 @@
 ---
-title: "Fusion Reactor Coupling"
+title: "PDE-Transformer"
 description: "Electromagnetics"
 date: 2025-10-01
 featured: true
 tags: ["Fusion Physics", "Electromagnetics", "Simulation"]
-image: "/images/projects/MaxPlanck.jpg"
+image: "/images/projects/PDETransformer.jpg"
 links:
   #github: "https://github.com/..."
 ---
