@@ -9,33 +9,24 @@ export type EducationEntry = {
 
 export const education: EducationEntry[] = [
   {
-    degree: 'M.Sc. Informatics',
+    degree: 'M.Sc. Computational Science and Engineering',
     university: 'Technical University of Munich (TUM)',
     location: 'Munich, Germany',
-    start: 'Apr 2024',
+    start: 'October 2024',
     end: 'Present',
     highlights: [
-      'Research focus: Machine Learning for Vision & Physics, Embodied AI, High-Performance Computing.'
+      'Research focus: Machine Learning for Physics and Numerical Methods.',
     ]
   },
   {
-    degree: 'B.Sc. Informatics',
-    university: 'Technical University of Munich (TUM)',
-    location: 'Munich, Germany',
-    start: 'Oct 2020',
-    end: 'Mar 2024',
+    degree: 'B.Sc. Mechanical Engineering',
+    university: 'Karlsruhe Institute of Technology (KIT)',
+    location: 'Karlsruhe, Germany',
+    start: 'Oct 2019',
+    end: 'September 2024',
     highlights: [
-      'Strong foundation in mathematics and computer science.',
-      'Minor in Electrical Engineering.'
+      'Head of Aerodynamics in the Formula Stundent Team KA-RaceIng',
     ]
   },
-  {
-    degree: 'Allgemeines Abitur / Highschool Diploma',
-    university: 'Gymnasium Eltville',
-    location: 'Eltville, Germany',
-    start: 'Sep 2011',
-    end: 'Jul 2020',
-    highlights: [
-    ]
-  }
+
 ];

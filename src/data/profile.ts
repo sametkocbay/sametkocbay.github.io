@@ -1,14 +1,13 @@
 export const profileDetails = {
   languages: [
-    'English (Bilingual, C2)',
+    'English (C1, TOEFL: 111/120)',
     'German (Native tongue)',
-    'French (B1)',
-    'Japanese (Basics)'
+    'Turkish',
   ],
   certificates: [
     'German Federal Scholarship',
     'German Physical Society Award',
     'CrossFit Coach License'
   ],
-  passions: ['Competitive Rowing', 'Olympic Weightlifting']
+  passions: ['Olympic Wrestling', "Cycling", 'Hiking/Climbing']
 };
