@@ -1,10 +1,10 @@
 ---
-title: "3D Vision Reconstruction"
-description: "MCMC-based 3D Gaussian Splatting with probabilistic sampling improvements."
+title: "Fusion"
+description: "Numerics"
 date: 2026-02-23
 featured: true
 tags: ["Vision", "Reconstruction", "Deep Learning"]
-image: "/images/projects/3d_gaussian_splatting.jpg"
+image: "/images/projects/MaxPlanck.jpg"
 links:
   #writeup: "https://github.com/oscarbreiner"
   github: "https://github.com/oscarbreiner/3dgs-mcmc-boosted.git"
