@@ -12,7 +12,7 @@ export const experience: ExperienceEntry[] = [
   {
     role: 'Working Student/Thesis', // [cite: 5]
     company: 'Max Planck Institute for Plasma Physics', // [cite: 4]
-    location: 'Garching bei München, Germany',
+    location: 'Munich, Germany',
     start: 'Oct 2025', // [cite: 6]
     end: 'Present', // [cite: 6]
     bullets: [
@@ -35,7 +35,7 @@ export const experience: ExperienceEntry[] = [
   {
     role: 'Bachelor Thesis', // [cite: 15]
     company: 'Compact Dynamics', // [cite: 13]
-    location: 'Munich, Germany',
+    location: 'Starnberg, Germany',
     start: 'Mar 2024', // [cite: 14]
     end: 'Sep 2024', // [cite: 14]
     bullets: [
@@ -46,8 +46,8 @@ export const experience: ExperienceEntry[] = [
   },
   {
     role: 'Student Assistant', // [cite: 18]
-    company: 'Institute of Fluid Mechanics (TUM)', // [cite: 18]
-    location: 'Munich, Germany',
+    company: 'Institute of Fluid Mechanics (KIT)', // [cite: 18]
+    location: 'Karlsruhe, Germany',
     start: 'Jul 2023', // [cite: 19]
     end: 'Dec 2023', // [cite: 19]
     bullets: [
