@@ -13,5 +13,5 @@ export const siteData = {
 export const seo = {
   title: `${siteData.name} | Scientific Computing`,
   description: 'Portfolio of Samet Kocbay: ',
-  ogImage: 'public/images/projects/MainPage.jpg'
+  ogImage: '../public/images/projects/MainPage.jpg'
 };
