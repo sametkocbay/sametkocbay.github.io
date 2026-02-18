@@ -5,19 +5,15 @@ export type TechGroup = {
 
 export const techGroups: TechGroup[] = [
   {
-    title: 'AI / Research',
-    items: ['AI in Vision & Physics', '3D Reconstruction', 'Robotics', 'Machine Learning', 'SLAM & Odometry', 'Surogote Models', 'LLM & LMM', 'Multimodal Learning', 'Model Merging', 'Foundation Models', 'MLOps']
+    title: 'Scientific Domains',
+    items: ['Scientific Computing', 'Scientific Machine Learning', 'Physics', 'Fluid Dynamics', 'Fusion', 'Numerical Methods', 'Modelling']
   },
   {
     title: 'Programming',
-    items: ['Python', 'Java', 'C++', 'Assembly', 'Swift', 'SQL']
+    items: ['Python', 'C++', 'Jax', 'OpenMP', 'MPI', 'SYCL (GPU)']
   },
   {
     title: 'Tools / Systems',
-    items: ['Git', 'Docker', 'ROS 2', 'Matlab', 'Hydra', 'Slurm', 'Wandb', 'AWS', 'Linux', 'Microcontrollers']
+    items: ['Git', 'Matlab', 'Slurm', 'Linux']
   },
-  {
-    title: 'Modalities',
-    items: ['Text', 'Vision', '4D Radar', '3D Vision', 'Lidar', 'IMU', 'Physics Signals', 'Graphs', 'Time Series']
-  }
 ];

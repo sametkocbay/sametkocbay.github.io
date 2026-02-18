@@ -4,10 +4,5 @@ export const profileDetails = {
     'German (Native tongue)',
     'Turkish',
   ],
-  certificates: [
-    'German Federal Scholarship',
-    'German Physical Society Award',
-    'CrossFit Coach License'
-  ],
   passions: ['Olympic Wrestling', "Cycling", 'Hiking/Climbing']
 };
