@@ -1,0 +1,59 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import { withBase } from '../../utils/withBase';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props as Props;
+const { Content } = await render(project);
+const { title, description, date, tags, image } = project.data;
+const links = project.data.links ?? {};
+---
+
+<BaseLayout title={`${title} | Project`} description={description}>
+  <Navbar />
+  <main class="container-page section-spacing">
+    <a href={withBase('/projects')} class="text-sm font-semibold text-accent hover:underline">← Back to Projects</a>
+    <SectionHeader title={title} subtitle={description} />
+
+    <article class="surface-card overflow-hidden">
+      <img src={withBase(image)} alt={title} class="h-56 w-full border-b border-border object-cover sm:h-80" />
+      <div class="p-6 sm:p-8">
+        <p class="font-mono text-[11px] uppercase tracking-wide text-muted">{date.getFullYear()}</p>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span class="rounded-md border border-border bg-bg px-2 py-1 font-mono text-[11px] text-muted">{tag}</span>
+          ))}
+        </div>
+
+        <div class="mt-5 flex flex-wrap gap-4 text-sm">
+          {links.github && <a href={links.github} class="font-semibold text-accent hover:underline" target="_blank" rel="noreferrer">Code</a>}
+          {links.demo && <a href={links.demo} class="font-semibold text-accent hover:underline" target="_blank" rel="noreferrer">Demo</a>}
+          {links.writeup && <a href={links.writeup} class="font-semibold text-accent hover:underline" target="_blank" rel="noreferrer">Write-up</a>}
+        </div>
+
+        <div class="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-accent">
+          <Content />
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

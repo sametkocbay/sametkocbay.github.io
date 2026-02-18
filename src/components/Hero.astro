@@ -1,0 +1,58 @@
+---
+import { siteData } from '../data/site';
+import { withBase } from '../utils/withBase';
+
+const profileSrc = `${import.meta.env.BASE_URL}images/profile.jpeg`;
+const cvUrl = `${import.meta.env.BASE_URL}${siteData.cvPath}`;
+---
+
+<section id="home" class="section-spacing pb-8 sm:pb-12">
+  <div class="surface-card reveal p-7 shadow-soft sm:p-10">
+    <div class="grid gap-8 lg:grid-cols-[1fr_minmax(320px,520px)] lg:items-start">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.16em] text-muted">Research • Engineering • Machine Learning</p>
+        <h1 class="mt-3 max-w-5xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{siteData.name}</h1>
+        <p class="mt-2 text-base font-medium text-ink/90">{siteData.title}</p>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-muted sm:text-lg">{siteData.tagline}</p>
+
+        <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
+          <span>{siteData.location}</span>
+          {siteData.email && <a href={`mailto:${siteData.email}`} class="hover:text-ink">{siteData.email}</a>}
+          <a href={siteData.linkedinUrl} target="_blank" rel="noreferrer" class="hover:text-ink">LinkedIn</a>
+          <a href={siteData.githubUrl} target="_blank" rel="noreferrer" class="hover:text-ink">GitHub</a>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-2">
+          {siteData.heroChips.map((chip) => (
+            <span class="rounded-md border border-border bg-bg px-3 py-1.5 font-mono text-xs text-muted">{chip}</span>
+          ))}
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={withBase('/projects')}
+            class="rounded-lg border border-accent bg-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#121a2d]"
+          >
+            Explore Research
+          </a>
+          <a
+            href={cvUrl}
+            download
+            class="rounded-lg border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-ink transition hover:border-ink"
+          >
+            Download CV
+          </a>
+        </div>
+      </div>
+
+      <div class="w-full overflow-hidden rounded-xl border border-border bg-bg lg:justify-self-end">
+        <img
+          src={profileSrc}
+          alt={`${siteData.name} profile`}
+          class="w-full h-auto object-contain"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>

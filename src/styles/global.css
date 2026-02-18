@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+}
+
+.container-page {
+  @apply mx-auto w-full max-w-[94rem] px-4 sm:px-7 lg:px-12;
+}
+
+.surface-card {
+  @apply rounded-2xl border border-border bg-surface;
+}
+
+.reveal {
+  animation: fadeUp 0.55s ease-out both;
+}
+
+.section-spacing {
+  @apply py-12 sm:py-16;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
