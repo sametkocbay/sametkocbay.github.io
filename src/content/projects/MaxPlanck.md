@@ -1,23 +1,20 @@
 ---
-title: "Fusion"
-description: "Numerics"
-date: 2026-02-23
+title: "Fusion Reactor Coupling"
+description: "Electromagnetics"
+date: 2025-10-01
 featured: true
-tags: ["Vision", "Reconstruction", "Deep Learning"]
+tags: ["Fusion Physics", "Electromagnetics", "Simulation"]
 image: "/images/projects/MaxPlanck.jpg"
 links:
-  #writeup: "https://github.com/oscarbreiner"
-  github: "https://github.com/oscarbreiner/3dgs-mcmc-boosted.git"
+  #github: "https://github.com/..."
 ---
 
-Research project at the 3D AI Lab of Prof. Angela Dai, improving MCMC-based 3D Gaussian Splatting for more reliable optimization under difficult initial conditions.
+[cite_start]Research project and Master's Thesis at the Max Planck Institute for Plasma Physics.
 
 ## Highlights
 
-- Developed a probabilistic sampling strategy that improves exploration of Gaussian proposals.
-- Reduced collapse under poor initialization through stabilized early densification and parameter updates.
-- Achieved SfM-free reconstruction while maintaining robust quality across challenging scenes.
+- Deriving a self-consistent coupling for electromagnetic interactions of a fusion reactor.
 
 ---
 
-> **Note:** Competition code cannot be shared. Selected components will be released publicly if the IROS 2026 submission is accepted.
+**Note:** Ongoing research started in October 2025[cite: 6].
