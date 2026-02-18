@@ -1,10 +1,10 @@
 ---
-title: "PDE-Transformer"
+title: "Stellerator Plasma Simulation "
 description: "Electromagnetic coupling models for stellarator edge physics."
 date: 2025-10-01
 featured: true
 tags: ["Fusion Physics", "Electromagnetics", "Simulation", "Computational Physics"]
-image: "/images/projects/PDETransformer.jpg"
+image: "/images/projects/MaxPlanck.jpg"
 links:
   #github: "https://github.com/..."
 ---
@@ -18,7 +18,6 @@ Working at the intersection of computational physics, applied mathematics, and p
 ## Focus & Contributions
 
 - Collaborating closely with mathematicians and physicists to formulate and implement a rigorous coupling approach for multi-physics plasma simulations.
-- Developing numerical models to study **edge phenomena in stellarator fusion reactors**, where electromagnetic interactions, turbulence, and boundary effects strongly interact.
 - Contributing to the theoretical and computational foundations required for predictive simulations of fusion-relevant plasmas.
 
 ---

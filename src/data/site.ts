@@ -1,17 +1,17 @@
 export const siteData = {
   name: 'Samet Kocbay',
   title: 'TUM M.Sc. Computational Science and Engineering',
-  tagline: 'Theory-first when it matters. System-first when it counts.',
+  tagline: 'Bridging the gap between physics and machine learning.',
   location: 'Munich, Germany',
-  email: '',
+  email: 'samet.kocbay (at) tum (dot) de',
   githubUrl: 'noUrl',
   linkedinUrl: 'https://www.linkedin.com/in/samet-kocbay/',
   cvPath: 'cv.pdf',
-  heroChips: ['Numerics', 'Scientific Computing', 'Machine Learning', 'Physics'],
+  heroChips: ['Numerical Methods', 'Scientific Computing', 'Machine Learning', 'Physics'],
 };
 
 export const seo = {
-  title: `${siteData.name} | AI & Perception Research`,
+  title: `${siteData.name} | Scientific Computing`,
   description: 'Portfolio of Samet Kocbay: ',
   ogImage: 'public/images/projects/MainPage.jpg'
 };
