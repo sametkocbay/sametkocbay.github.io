@@ -13,5 +13,5 @@ export const siteData = {
 export const seo = {
   title: `${siteData.name} | AI & Perception Research`,
   description: 'Portfolio of Samet Kocbay: ',
-  ogImage: 'public/images/MainPage.jpg'
+  ogImage: 'public/images/projects/MainPage.jpg'
 };
