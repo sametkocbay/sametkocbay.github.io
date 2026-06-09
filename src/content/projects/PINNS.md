@@ -9,7 +9,7 @@ links:
   #website: "https://www.ka-raceing.de/"
 ---
 
-During my Bachelor's studies, I explored **Physics-Informed Neural Networks (PINNs)** as an introduction to scientific machine learning and inverse problems in fluid dynamics.
+As a student assistant at the KIT Institute of Fluid Mechanics — a research project carried out **in parallel to my bachelor thesis** (not the thesis itself) — I explored **Physics-Informed Neural Networks (PINNs)** as an introduction to scientific machine learning and inverse problems in fluid dynamics.
 
 The project focused on training a PINN to model **pinhole flow governed by the Navier–Stokes equations**, with the long-term goal of enabling geometry optimization based on learned physical constraints.
 

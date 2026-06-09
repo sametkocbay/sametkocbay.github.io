@@ -28,11 +28,12 @@ export const experience: ExperienceEntry[] = [
     start: 'Oct 2024',
     end: 'Sep 2025',
     bullets: [
+      'Developed features for the production FEM simulation pipeline while it was in active use, shipping updates live to engineers.',
+      'Built an end-to-end automation that assembles full chassis models — resolving bolted/screwed connections, preparing the mesh, and pulling part data from BMW’s internal databases.',
       'Built a surrogate model for the operator-valued mapping from structural parameters to frequency responses.',
-      'Improved prediction accuracy by >40% using multi-task Gaussian Processes.',
-      'Reduced computational cost by ~80% via latent representation learning.'
+      'Improved prediction accuracy by >40% using multi-task Gaussian Processes and reduced computational cost by ~80% via latent representation learning.'
     ],
-    tech: ['Gaussian Processes', 'Surrogate Modeling', 'GPyTorch', 'Python']
+    tech: ['FEM', 'Automation', 'Meshing', 'Gaussian Processes', 'Surrogate Modeling', 'Python']
   },
   {
     role: 'Bachelor Thesis',
