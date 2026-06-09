@@ -4,7 +4,7 @@ description: "Early research on PINNs for inverse Navier–Stokes problems and g
 date: 2023-06-01
 featured: true
 tags: ["Fluid Dynamics", "CFD", "Machine Learning", "PINNs"]
-image: "/images/projects/PINNS.jpg"
+image: "/images/projects/PINNS.png"
 links:
   #website: "https://www.ka-raceing.de/"
 ---

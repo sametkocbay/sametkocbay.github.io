@@ -35,7 +35,6 @@ const educationItems = education.map((item) => ({
 
 const personalCards = [
   { title: 'Languages', items: profileDetails.languages },
-  { title: 'Certificates', items: profileDetails.certificates },
   { title: 'Passions', items: profileDetails.passions }
 ];
 ---
@@ -48,7 +47,7 @@ const personalCards = [
     <section id="projects" class="section-spacing">
       <SectionHeader
         title="Research Highlights"
-        subtitle="A selection of projects spanning multimodal fusion, 3D scene understanding, and robust deployment."
+        subtitle="Selected work across scientific machine learning, PDE-based modeling, and computational physics."
       />
       <div id="featured-project-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {featuredProjects.map((project) => <ProjectCard project={project} />)}
@@ -87,7 +86,7 @@ const personalCards = [
     </section>
 
     <section id="stack" class="section-spacing">
-      <SectionHeader title="Tech Stack" subtitle="Core tools for research throughput and production-grade system delivery." />
+      <SectionHeader title="Tech Stack" subtitle="Core languages, ML frameworks, and simulation tools used across research and engineering." />
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-12">
         {techGroups.map((group, idx) => (
           <article
@@ -172,12 +171,12 @@ const personalCards = [
     <section class="section-spacing">
       <div class="grid grid-cols-1 gap-10 xl:grid-cols-2 xl:gap-12">
         <div id="experience">
-          <SectionHeader title="Work Experience" subtitle="Production-grade perception systems built across research and engineering teams." />
+          <SectionHeader title="Work Experience" subtitle="Research and engineering roles spanning fusion, surrogate modeling, and scientific ML." />
           <Timeline items={experienceItems} variant="experience" />
         </div>
 
         <div id="education">
-          <SectionHeader title="Education" subtitle="Academic foundation in robotics, vision, and machine learning." />
+          <SectionHeader title="Education" subtitle="Computational science foundation across engineering, applied math, and physics." />
           <Timeline items={educationItems} variant="education" />
         </div>
       </div>
@@ -189,7 +188,7 @@ const personalCards = [
         {personalCards.map((card, idx) => (
           <article
             class={`group reveal relative overflow-hidden rounded-2xl border border-border bg-surface p-5 transition duration-300 hover:-translate-y-1 hover:shadow-card sm:p-6 ${
-              idx === 0 ? 'xl:col-span-5' : idx === 1 ? 'xl:col-span-4' : 'xl:col-span-3'
+              idx === 0 ? 'xl:col-span-6' : 'xl:col-span-6'
             }`}
           >
             <div
@@ -216,11 +215,6 @@ const personalCards = [
                     idx === 0 ? (
                       <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path d="M4 7h10M4 12h16M4 17h9" />
-                      </svg>
-                    ) : idx === 1 ? (
-                      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <path d="M8 12l2.5 2.5L16 9" />
-                        <rect x="4" y="4" width="16" height="16" rx="2.5" />
                       </svg>
                     ) : (
                       <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">

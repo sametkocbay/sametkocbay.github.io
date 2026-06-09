@@ -1,7 +1,7 @@
 ---
 title: "Gaussian Process in Acoustics"
 description: "Surrogate modeling for acoustic simulations using Gaussian Processes."
-date: 2023-06-01
+date: 2024-10-01
 featured: true
 tags: ["Acoustics", "Gaussian Processes", "Machine Learning", "Surrogate Modeling"]
 image: "/images/projects/GP.jpg"

@@ -4,7 +4,7 @@ export const siteData = {
   tagline: 'Bridging the gap between physics and machine learning.',
   location: 'Munich, Germany',
   email: 'samet.kocbay (at) tum (dot) de',
-  githubUrl: 'noUrl',
+  githubUrl: 'https://github.com/sametkocbay',
   linkedinUrl: 'https://www.linkedin.com/in/samet-kocbay/',
   cvPath: 'cv.pdf',
   heroChips: ['Numerical Methods', 'Scientific Computing', 'Machine Learning', 'Physics'],
@@ -12,6 +12,6 @@ export const siteData = {
 
 export const seo = {
   title: `${siteData.name} | Scientific Computing`,
-  description: 'Portfolio of Samet Kocbay: ',
+  description: 'Portfolio of Samet Kocbay — M.Sc. student in Computational Science and Engineering working on scientific machine learning, PDE-based modeling, and computational physics.',
   ogImage: '/images/projects/MainPage.jpg'
 };

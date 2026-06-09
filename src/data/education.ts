@@ -13,9 +13,10 @@ export const education: EducationEntry[] = [
     university: 'Technical University of Munich (TUM)',
     location: 'Munich, Germany',
     start: 'October 2024',
-    end: 'Present',
+    end: 'April 2027',
     highlights: [
-      'Research focus: Machine Learning for Physics and Numerical Methods.',
+      'Research focus: machine learning for physics and numerical methods.',
+      'Current grade: 1.5 (German scale).',
     ]
   },
   {
@@ -25,7 +26,7 @@ export const education: EducationEntry[] = [
     start: 'Oct 2019',
     end: 'September 2024',
     highlights: [
-      'Head of Aerodynamics in the Formula Stundent Team KA-RaceIng',
+      'Head of Aerodynamics in the Formula Student team KA-RaceIng.',
     ]
   },
 

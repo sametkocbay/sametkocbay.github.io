@@ -10,61 +10,64 @@ export type ExperienceEntry = {
 
 export const experience: ExperienceEntry[] = [
   {
-    role: 'Working Student/Thesis', // [cite: 5]
-    company: 'Max Planck Institute for Plasma Physics', // [cite: 4]
+    role: 'Working Student / Thesis',
+    company: 'Max Planck Institute for Plasma Physics',
     location: 'Munich, Germany',
-    start: 'Oct 2025', // [cite: 6]
-    end: 'Present', // [cite: 6]
+    start: 'Oct 2025',
+    end: 'Sep 2026',
     bullets: [
-      'Deriving a self-consistent coupling for electromagnetic interactions of a fusion reactor.' // [cite: 7]
+      'Developing a self-consistent boundary coupling for MHD and electromagnetic interactions in fusion plasmas.',
+      'Implementing methods in the large-scale nonlinear MHD code JOREK to analyze magnetic-island behavior.'
     ],
-    tech: ['Fusion Physics', 'Electromagnetics', 'Simulation']
+    tech: ['Fusion Physics', 'MHD', 'JOREK', 'Electromagnetics']
   },
   {
-    role: 'Working Student', // [cite: 10]
-    company: 'BMW', // [cite: 8]
+    role: 'Working Student',
+    company: 'BMW Group',
     location: 'Munich, Germany',
-    start: 'Oct 2024', // [cite: 9]
-    end: 'Sep 2025', // [cite: 9]
+    start: 'Oct 2024',
+    end: 'Sep 2025',
     bullets: [
-      'Developed a Gaussian process surrogate model for acoustic analysis.', // [cite: 11]
-      'Built and deployed a neural network to predict optimal solver settings.' // [cite: 12]
+      'Built a surrogate model for the operator-valued mapping from structural parameters to frequency responses.',
+      'Improved prediction accuracy by >40% using multi-task Gaussian Processes.',
+      'Reduced computational cost by ~80% via latent representation learning.'
     ],
-    tech: ['Gaussian Processes', 'Neural Networks', 'Surrogate Modeling', 'Python']
+    tech: ['Gaussian Processes', 'Surrogate Modeling', 'GPyTorch', 'Python']
   },
   {
-    role: 'Bachelor Thesis', // [cite: 15]
-    company: 'Compact Dynamics', // [cite: 13]
+    role: 'Bachelor Thesis',
+    company: 'Compact Dynamics',
     location: 'Starnberg, Germany',
-    start: 'Mar 2024', // [cite: 14]
-    end: 'Sep 2024', // [cite: 14]
+    start: 'Mar 2024',
+    end: 'Sep 2024',
     bullets: [
-      'Developed an RNN for real-time rotor temperature prediction in electric motors.', // [cite: 16]
-      'Validated the model on the test bench.' // [cite: 17]
+      'Developed an RNN-based thermal neural network for rotor-temperature estimation in electric motors, achieving 3–6 °C prediction error.',
+      'Deployed the model for real-time inference on an embedded control unit, improving accuracy with EMF corrections.'
     ],
-    tech: ['RNN', 'Deep Learning', 'Electric Motors', 'Real-time Systems']
+    tech: ['RNN', 'Deep Learning', 'Electric Motors', 'Embedded / Real-time']
   },
   {
-    role: 'Student Assistant', // [cite: 18]
-    company: 'Institute of Fluid Mechanics (KIT)', // [cite: 18]
+    role: 'Student Assistant',
+    company: 'Institute of Fluid Mechanics (KIT)',
     location: 'Karlsruhe, Germany',
-    start: 'Jul 2023', // [cite: 19]
-    end: 'Dec 2023', // [cite: 19]
+    start: 'Jul 2023',
+    end: 'Dec 2023',
     bullets: [
-      'Researched and implemented a physics-informed neural network for inverse Navier-Stokes problems.', // [cite: 20]
-      'Analyzed the influence of additional loss function terms.' // [cite: 21]
+      'Reconstructed velocity and pressure fields from sparse PIV measurements using physics-informed neural networks.',
+      'Reduced experimental measurement requirements by leaning on the learned physics constraints.'
     ],
     tech: ['PINNs', 'Fluid Dynamics', 'Navier-Stokes', 'Deep Learning']
   },
   {
-    role: 'Head of Aerodynamics', // [cite: 39]
-    company: 'Formula Student (KA RaceIng)', // [cite: 39]
+    role: 'Head of Aerodynamics',
+    company: 'Formula Student (KA RaceIng)',
     location: 'Karlsruhe, Germany',
-    start: 'Sep 2022', // [cite: 40]
-    end: 'Oct 2023', // [cite: 40]
+    start: 'Oct 2021',
+    end: 'Sep 2023',
     bullets: [
-      'Led a team of 13 engineers, overseeing aerodynamic design, lightweight structures, and CFD analysis.', // [cite: 41]
-      'Maintained team motivation and efficiency in a high-pressure environment.' // [cite: 42]
+      'Led a 13-person team over a full aerodynamic development cycle, from CFD to in-house manufacturing.',
+      'Designed and optimized the aero package (+14% downforce) using RANS-based CFD (k-ω SST).',
+      'Performed mesh generation, boundary-layer resolution (y+ control), and grid-convergence studies.'
     ],
     tech: ['Leadership', 'Aerodynamics', 'CFD', 'Project Management']
   }

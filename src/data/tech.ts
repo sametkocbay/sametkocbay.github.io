@@ -5,19 +5,19 @@ export type TechGroup = {
 
 export const techGroups: TechGroup[] = [
   {
-    title: 'Scientific Domains',
-    items: ['Scientific Computing', 'Scientific Machine Learning', 'Physics', 'Fluid Dynamics', 'Fusion', 'Numerical Methods', 'Modelling']
-  },
-  {
     title: 'Programming',
-    items: ['Python', 'C++', 'Jax', 'OpenMP', 'MPI', 'SYCL (GPU)']
+    items: ['Python', 'C++', 'MATLAB', 'Bash', 'OpenMP', 'MPI', 'Linux']
   },
   {
-    title: 'Modalities',
-    items: ['Text', 'Vision', '4D Radar', '3D Vision', 'Lidar', 'IMU', 'Physics Signals', 'Graphs', 'Time Series']
+    title: 'ML & SciML',
+    items: ['PyTorch', 'GPyTorch', 'PINNs', 'Neural Operators', 'Gaussian Processes']
   },
   {
-    title: 'Tools / Systems',
-    items: ['Git', 'Matlab', 'Slurm', 'Linux']
+    title: 'CAE & CFD',
+    items: ['STAR-CCM+', 'OpenFOAM', 'RANS / k-ω SST', 'Meshing', 'Turbulence Modeling', 'FEM', 'FVM', 'Composite Optimization']
+  },
+  {
+    title: 'Scientific Domains',
+    items: ['Scientific Computing', 'Scientific ML', 'Computational Physics', 'Fluid Dynamics', 'Fusion / Plasma', 'Numerical Methods']
   },
 ];
