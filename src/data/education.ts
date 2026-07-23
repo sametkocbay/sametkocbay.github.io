@@ -16,6 +16,6 @@ export const education: EducationEntry[] = [
     degree: 'B.Sc. Mechanical Engineering',
     dates: 'oct 2019 — sep 2024',
     school: 'Karlsruhe Institute of Technology (KIT)',
-    highlights: ['Head of Aerodynamics, Formula Student team KA-RaceIng.']
+    highlights: ['Head of Aerodynamics, Formula Student team KA-RaceIng.', 'Tutor for technical mechanics II, III & IV']
   }
 ];
