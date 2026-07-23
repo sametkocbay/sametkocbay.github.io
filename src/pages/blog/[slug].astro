@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { withBase } from '../../utils/withBase';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, date, tag, dek } = post.data;
+---
+
+<BaseLayout title={`${title} | Samet Kocbay`} description={dek}>
+  <Navbar active="blog" />
+  <main class="container-narrow pb80">
+    <p class="crumb">
+      <a href={withBase('/blog/')}>~/blog</a> <span class="sep">/</span> {post.slug}.md
+    </p>
+    <header class="detail-head">
+      <p class="detail-meta">{date} · {tag}</p>
+      <h1 class="detail-title">{title}</h1>
+      <p class="detail-dek">{dek}</p>
+    </header>
+    <article class="article">
+      <Content />
+    </article>
+    <div class="prevnext">
+      <a href={withBase('/blog/')} class="back">← back to blog</a>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

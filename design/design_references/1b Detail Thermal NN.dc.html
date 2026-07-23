@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12;color:#e8eaf0;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#6ee7dc;text-decoration:none}
+a:hover{color:#8ff0e6}
+::selection{background:rgba(110,231,220,.25)}
+</style>
+</helmet>
+<nav style="position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(110,231,220,.14);background:rgba(11,13,18,.92);backdrop-filter:blur(10px)">
+  <div style="margin:0 auto;max-width:1280px;padding:0 40px;display:flex;height:60px;align-items:center;justify-content:space-between;gap:16px">
+    <a href="1b Home.dc.html" style="font:600 13px 'IBM Plex Mono',monospace;color:#e8eaf0;white-space:nowrap"><span style="color:#6ee7dc">~/</span>samet-kocbay</a>
+    <div style="display:flex;gap:26px;font:400 12.5px 'IBM Plex Mono',monospace">
+      <a href="1b Home.dc.html" style="color:#8b93a5">index</a>
+      <a href="1b Projects.dc.html" style="color:#6ee7dc">projects</a>
+      <a href="1b Blog.dc.html" style="color:#8b93a5">blog</a>
+      <a href="1b Home.dc.html#experience" style="color:#8b93a5">experience</a>
+    </div>
+    <a href="uploads/cv.pdf" style="font:500 11.5px 'IBM Plex Mono',monospace;border:1px solid rgba(110,231,220,.5);color:#6ee7dc;padding:7px 14px;border-radius:4px;white-space:nowrap" style-hover="background:rgba(110,231,220,.08)">cv.pdf ↓</a>
+  </div>
+</nav>
+<main style="margin:0 auto;max-width:860px;padding:0 40px 80px">
+  <p style="margin:48px 0 0;font:400 12px 'IBM Plex Mono',monospace;color:#465064"><a href="1b Projects.dc.html" style="color:#465064" style-hover="color:#6ee7dc">~/projects</a> <span style="color:#6ee7dc">/</span> thermal-nn-rotor.md</p>
+  <header style="margin-top:28px;padding-bottom:32px;border-bottom:1px solid rgba(139,147,165,.22)">
+    <p style="margin:0;font:400 11px 'IBM Plex Mono',monospace;color:#6ee7dc">[2024] deep-learning · bachelor thesis @ compact dynamics</p>
+    <h1 style="margin:12px 0 0;font-size:42px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:#e8eaf0">Thermal Neural Network for Rotor Temperature</h1>
+    <p style="margin:14px 0 0;font:400 14px/1.65 'IBM Plex Mono',monospace;color:#8b93a5">A physics-structured RNN estimating rotor temperature in a WRC electric motor — deployed for real-time inference on the control unit.</p>
+    <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:6px">
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">rnn</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">pytorch</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">embedded</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">e-motors</span>
+    </div>
+  </header>
+  <figure style="margin:32px 0 0">
+    <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;overflow:hidden;background:#0e1524"><img src="assets/wrc-car.jpg" style="width:100%;display:block" alt="WRC rally hybrid car"></div>
+    <figcaption style="margin-top:10px;font:400 11.5px/1.6 'IBM Plex Mono',monospace;color:#465064">the WRC rally hybrid — the drive unit's rotor cannot be instrumented in operation.</figcaption>
+  </figure>
+  <article style="font-size:15.5px;line-height:1.75;color:#b6bdcb">
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>The problem</h2>
+    <p style="margin:16px 0 0">The rotor of an electric motor is the one component whose temperature you most want to know — magnets demagnetize, ratings derate — and the one you cannot measure: it spins. In a <strong style="color:#e8eaf0">WRC rally hybrid</strong>, load transients are extreme and thermal margins thin, so the control unit needs a live rotor-temperature estimate it can trust.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Architecture</h2>
+    <p style="margin:16px 0 0">I developed a <strong style="color:#e8eaf0">thermal neural network</strong>: an RNN whose recurrence mirrors a lumped-parameter thermal network, so the hidden state is a vector of physically meaningful node temperatures rather than an opaque embedding. The <strong style="color:#e8eaf0">cold-start problem</strong> — an unknown initial rotor temperature after standstill — was resolved by using <strong style="color:#e8eaf0">back-EMF</strong> as a physics-based correction to the recurrent state.</p>
+    <figure style="margin:28px 0 0">
+      <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;overflow:hidden;background:#fff"><img src="assets/tnn-schema.png" style="width:100%;display:block" alt="Thermal neural network architecture schema"></div>
+      <figcaption style="margin-top:10px;font:400 11.5px/1.6 'IBM Plex Mono',monospace;color:#465064">fig 1 — thermal network structure: conductances and power losses parameterized by small MLPs, temperatures propagated as recurrent state.</figcaption>
+    </figure>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Results</h2>
+    <ul style="margin:16px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:12px">
+      <li><strong style="color:#e8eaf0">3–6 °C prediction error</strong> across drive cycles — accurate enough for thermal protection logic.</li>
+      <li><strong style="color:#e8eaf0">Real-time on the ECU.</strong> The model was deployed for embedded inference on the motor control unit, not just evaluated offline.</li>
+      <li><strong style="color:#e8eaf0">Physics beats capacity.</strong> The structured recurrence generalizes from limited test-bench data where black-box RNNs overfit.</li>
+    </ul>
+  </article>
+  <div style="margin-top:56px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(139,147,165,.22);padding-top:24px;font:400 12px 'IBM Plex Mono',monospace">
+    <a href="1b Detail GP Acoustics.dc.html" style="color:#8b93a5" style-hover="color:#6ee7dc">← prev: gp-acoustics-surrogates.md</a>
+    <a href="1b Detail PINNs.dc.html" style="color:#6ee7dc">next: pinn-piv-reconstruction.md →</a>
+  </div>
+</main>
+<footer style="border-top:1px solid rgba(110,231,220,.14)">
+  <div style="margin:0 auto;max-width:1280px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:400 12px 'IBM Plex Mono',monospace;color:#465064">
+    <p style="margin:0">© 2026 samet kocbay · munich</p>
+    <div style="display:flex;gap:20px">
+      <a href="https://github.com/sametkocbay" style="color:#465064" style-hover="color:#6ee7dc">github</a>
+      <a href="https://www.linkedin.com/in/samet-kocbay/" style="color:#465064" style-hover="color:#6ee7dc">linkedin</a>
+      <a href="mailto:samet.kocbay@tum.de" style="color:#465064" style-hover="color:#6ee7dc">email</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+</body>
+</html>

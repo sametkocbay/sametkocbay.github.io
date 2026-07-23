@@ -1,23 +1,30 @@
 export type TechGroup = {
-  title: string;
+  path: string;
   items: string[];
 };
 
 export const techGroups: TechGroup[] = [
   {
-    title: 'Programming',
-    items: ['Python', 'C++', 'MATLAB', 'Bash', 'OpenMP', 'MPI', 'Linux']
+    path: '/skills/programming',
+    items: ['Python', 'C++', 'Fortran', 'MATLAB', 'Bash', 'OpenMP', 'MPI', 'Linux']
   },
   {
-    title: 'ML & SciML',
+    path: '/skills/ml-sciml',
     items: ['PyTorch', 'GPyTorch', 'PINNs', 'Neural Operators', 'Gaussian Processes']
   },
   {
-    title: 'CAE & CFD',
-    items: ['STAR-CCM+', 'OpenFOAM', 'RANS / k-ω SST', 'Meshing', 'Turbulence Modeling', 'FEM', 'FVM', 'Composite Optimization']
+    path: '/skills/cae-cfd',
+    items: ['STAR-CCM+', 'OpenFOAM', 'RANS / k-ω SST', 'Meshing', 'FEM', 'FVM', 'Composite Optimization']
   },
   {
-    title: 'Scientific Domains',
-    items: ['Scientific Computing', 'Scientific ML', 'Computational Physics', 'Fluid Dynamics', 'Fusion / Plasma', 'Numerical Methods']
-  },
+    path: '/skills/domains',
+    items: [
+      'Scientific Computing',
+      'Scientific ML',
+      'Computational Physics',
+      'Fluid Dynamics',
+      'Fusion / Plasma',
+      'Numerical Methods'
+    ]
+  }
 ];

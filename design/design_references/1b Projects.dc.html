@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12;color:#e8eaf0;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#e8eaf0;text-decoration:none}
+a:hover{color:#6ee7dc}
+::selection{background:rgba(110,231,220,.25)}
+</style>
+</helmet>
+<nav style="position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(110,231,220,.14);background:rgba(11,13,18,.92);backdrop-filter:blur(10px)">
+  <div style="margin:0 auto;max-width:1280px;padding:0 40px;display:flex;height:60px;align-items:center;justify-content:space-between;gap:16px">
+    <a href="1b Home.dc.html" style="font:600 13px 'IBM Plex Mono',monospace;white-space:nowrap"><span style="color:#6ee7dc">~/</span>samet-kocbay</a>
+    <div style="display:flex;gap:26px;font:400 12.5px 'IBM Plex Mono',monospace">
+      <a href="1b Home.dc.html" style="color:#8b93a5">index</a>
+      <a href="1b Projects.dc.html" style="color:#6ee7dc">projects</a>
+      <a href="1b Blog.dc.html" style="color:#8b93a5">blog</a>
+      <a href="1b Home.dc.html#experience" style="color:#8b93a5">experience</a>
+    </div>
+    <a href="uploads/cv.pdf" style="font:500 11.5px 'IBM Plex Mono',monospace;border:1px solid rgba(110,231,220,.5);color:#6ee7dc;padding:7px 14px;border-radius:4px;white-space:nowrap" style-hover="background:rgba(110,231,220,.08)">cv.pdf ↓</a>
+  </div>
+</nav>
+<main style="margin:0 auto;max-width:1280px;padding:0 40px 80px">
+  <header style="padding:64px 0 8px">
+    <p style="margin:0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">ls ./research --all | grep <span style="color:#e8eaf0">{{ activeLabel }}</span></p>
+    <h1 style="margin:12px 0 0;font-size:44px;font-weight:700;letter-spacing:-.02em;color:#e8eaf0">Projects</h1>
+    <p style="margin:12px 0 0;font:400 14px/1.6 'IBM Plex Mono',monospace;color:#8b93a5;max-width:620px">Research and engineering across scientific ML, PDE-based modeling, and computational physics.</p>
+    <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ tagButtons }}" as="tb" hint-placeholder-count="8">
+        <button onClick="{{ tb.onClick }}" style="font:400 12px 'IBM Plex Mono',monospace;cursor:pointer;border:1px solid {{ tb.border }};border-radius:4px;padding:6px 12px;background:{{ tb.bg }};color:{{ tb.color }}">{{ tb.label }}</button>
+      </sc-for>
+    </div>
+  </header>
+  <div style="margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <sc-for list="{{ visibleProjects }}" as="p" hint-placeholder-count="6">
+      <a href="{{ p.href }}" style="border:1px solid rgba(139,147,165,.22);border-radius:6px;overflow:hidden;background:#11141b;display:flex;flex-direction:column;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(110,231,220,.5);transform:translateY(-3px)">
+        <div style="position:relative;height:160px;background:#0e1524;border-bottom:1px solid rgba(139,147,165,.22);overflow:hidden">
+          <div style="position:absolute;inset:0;background-color:#0e1524;background-image:{{ p.bgImage }};background-size:cover;background-position:center;opacity:.9"></div>
+          <sc-if value="{{ p.noImage }}" hint-placeholder-val="{{ false }}">
+            <div style="height:100%;display:flex;align-items:center;justify-content:center;background-image:linear-gradient(rgba(110,231,220,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(110,231,220,.05) 1px,transparent 1px);background-size:20px 20px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#465064">{{ p.imageLabel }}</span></div>
+          </sc-if>
+          <span style="position:absolute;right:12px;top:12px;font:400 10.5px 'IBM Plex Mono',monospace;color:#6ee7dc;background:rgba(11,13,18,.85);border:1px solid rgba(110,231,220,.3);border-radius:4px;padding:3px 8px">{{ p.year }}</span>
+        </div>
+        <div style="padding:18px 20px;display:flex;flex-direction:column;flex:1">
+          <h3 style="margin:0;font-size:18px;line-height:1.25;font-weight:600;color:#e8eaf0">{{ p.title }}</h3>
+          <p style="margin:8px 0 0;font:400 12.5px/1.6 'IBM Plex Mono',monospace;color:#8b93a5">{{ p.description }}</p>
+          <div style="margin:auto 0 0;padding-top:14px;display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="4">
+              <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px">{{ t }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </a>
+    </sc-for>
+  </div>
+</main>
+<footer style="border-top:1px solid rgba(110,231,220,.14)">
+  <div style="margin:0 auto;max-width:1280px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:400 12px 'IBM Plex Mono',monospace;color:#465064">
+    <p style="margin:0">© 2026 samet kocbay · munich</p>
+    <div style="display:flex;gap:20px">
+      <a href="https://github.com/sametkocbay" style="color:#465064" style-hover="color:#6ee7dc">github</a>
+      <a href="https://www.linkedin.com/in/samet-kocbay/" style="color:#465064" style-hover="color:#6ee7dc">linkedin</a>
+      <a href="mailto:samet.kocbay@tum.de" style="color:#465064" style-hover="color:#6ee7dc">email</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { tag: 'all' };
+  static projects = [
+    { title: 'Review on PDE-Transformer', year: '2025', image: 'assets/energy-spectrum.png', noImage: false, description: 'Review and experimental evaluation of a PDE foundation model: noise robustness judged by energy spectra & enstrophy on 2D Kolmogorov flow.', tags: ['deep-learning','pdes','transformers','scientific-ml'] },
+    { title: 'Fusion Research', year: '2025', image: 'uploads/Reactor_wendelstein_greifswald.jpeg', noImage: false, description: "Master's thesis at Max Planck IPP: free-boundary coupling between the MHD code JOREK and the EM solver CARIDDI.", tags: ['fusion','mhd','electromagnetics','fem'] },
+    { title: 'Gaussian Process in Acoustics', year: '2024', image: 'assets/gp-posterior.png', noImage: false, description: 'GP surrogate for acoustic simulations at BMW — feature engineering and kernel design; outperformed prior internal models.', tags: ['gaussian-processes','surrogate-modeling','machine-learning'] },
+    { title: 'Thermal NN for Rotor Temperature', year: '2024', image: 'assets/wrc-car.jpg', noImage: false, description: 'Bachelor thesis: physics-structured RNN estimating rotor temperature in a WRC motor, deployed in real time on the ECU.', tags: ['deep-learning','rnn','embedded','motorsport'] },
+    { title: 'Formula Student — KA RaceIng', year: '2023', image: 'uploads/karacein.jpg', noImage: false, description: 'Head of Aerodynamics: led 13 engineers through a full aero cycle, +14% downforce via RANS CFD, in-house composite manufacturing.', tags: ['aerodynamics','cfd','leadership','composites'] },
+    { title: 'Physics-Informed Neural Networks', year: '2023', image: 'uploads/pIV.jpg', noImage: false, description: 'Inverse Navier–Stokes at KIT: reconstructing velocity/pressure fields from sparse PIV measurements with PINNs.', tags: ['pinns','fluid-dynamics','machine-learning','cfd'] }
+  ];
+  renderVals() {
+    const all = Component.projects;
+    const tags = ['all', ...Array.from(new Set(all.flatMap(p => p.tags))).sort()];
+    const active = this.state.tag;
+    return {
+      activeLabel: active === 'all' ? '"*"' : '"' + active + '"',
+      tagButtons: tags.map(t => ({
+        label: t, onClick: () => this.setState({ tag: t }),
+        bg: t === active ? '#6ee7dc' : 'transparent',
+        color: t === active ? '#0b0d12' : '#8b93a5',
+        border: t === active ? '#6ee7dc' : 'rgba(139,147,165,.3)'
+      })),
+      visibleProjects: (active === 'all' ? all : all.filter(p => p.tags.includes(active))).map(p => ({ ...p, bgImage: p.image ? "url('" + p.image + "')" : 'none', href: ({'Review on PDE-Transformer':'1b Project Detail.dc.html','Fusion Research':'1b Detail Fusion.dc.html','Gaussian Process in Acoustics':'1b Detail GP Acoustics.dc.html','Thermal NN for Rotor Temperature':'1b Detail Thermal NN.dc.html','Formula Student — KA RaceIng':'1b Detail KA RaceIng.dc.html','Physics-Informed Neural Networks':'1b Detail PINNs.dc.html'})[p.title] || '1b Projects.dc.html' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

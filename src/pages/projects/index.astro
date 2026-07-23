@@ -4,52 +4,62 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import TagFilter from '../../components/TagFilter.astro';
-import SectionHeader from '../../components/SectionHeader.astro';
 
-const projects = (await getCollection('projects')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-const tags = [...new Set(projects.flatMap((project) => project.data.tags))].sort();
+const projects = (await getCollection('projects')).sort((a, b) => a.data.listOrder - b.data.listOrder);
+const tags = ['all', ...[...new Set(projects.flatMap((project) => project.data.tags))].sort()];
 ---
 
-<BaseLayout title="Projects | Portfolio" description="All project posts with tags, demos, and source code links.">
-  <Navbar />
-  <main class="container-page section-spacing">
-    <SectionHeader title="All Projects" subtitle="Filter by topic and open source links, demos, and write-ups." />
-    <TagFilter tags={tags} targetId="all-project-grid" />
-    <div id="all-project-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {projects.map((project) => <ProjectCard project={project} />)}
+<BaseLayout
+  title="Projects | Samet Kocbay"
+  description="Research and engineering across scientific ML, PDE-based modeling, and computational physics."
+>
+  <Navbar active="projects" />
+  <main class="container pb80">
+    <header class="page-head">
+      <p class="prompt">ls ./research --all | grep <span id="activeLabel" class="grep-arg">"*"</span></p>
+      <h1 class="page-title">Projects</h1>
+      <p class="page-sub sub-620">
+        Research and engineering across scientific ML, PDE-based modeling, and computational physics.
+      </p>
+      <div class="filter-row">
+        {tags.map((tag) => (
+          <button class={`filter-btn${tag === 'all' ? ' active' : ''}`} data-filter={tag}>{tag}</button>
+        ))}
+      </div>
+    </header>
+    <div class="grid-3 projects-grid">
+      {projects.map((project) => <ProjectCard project={project} variant="list" />)}
     </div>
-    <script>
-      const equalizeProjectCards = (gridId) => {
-        const grid = document.getElementById(gridId);
-        if (!grid) return;
-
-        const descriptions = Array.from(grid.querySelectorAll('[data-project-description]'));
-        const cards = Array.from(grid.querySelectorAll('[data-project-card]'));
-        if (!descriptions.length || !cards.length) return;
-
-        descriptions.forEach((el) => {
-          el.style.minHeight = '0px';
-        });
-        cards.forEach((el) => {
-          el.style.minHeight = '0px';
-        });
-
-        const maxDescriptionHeight = Math.max(...descriptions.map((el) => el.getBoundingClientRect().height));
-        descriptions.forEach((el) => {
-          el.style.minHeight = `${maxDescriptionHeight}px`;
-        });
-
-        const maxCardHeight = Math.max(...cards.map((el) => el.getBoundingClientRect().height));
-        cards.forEach((el) => {
-          el.style.minHeight = `${maxCardHeight}px`;
-        });
-      };
-
-      const runEqualize = () => equalizeProjectCards('all-project-grid');
-      runEqualize();
-      window.addEventListener('resize', runEqualize);
-    </script>
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  .grep-arg {
+    color: var(--text);
+  }
+  .sub-620 {
+    max-width: 620px;
+  }
+  .projects-grid {
+    margin-top: 32px;
+  }
+</style>
+
+<script>
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-card]'));
+  const label = document.getElementById('activeLabel');
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const tag = button.dataset.filter ?? 'all';
+      buttons.forEach((b) => b.classList.toggle('active', b === button));
+      if (label) label.textContent = tag === 'all' ? '"*"' : `"${tag}"`;
+      cards.forEach((card) => {
+        const cardTags = (card.dataset.tags ?? '').split(',');
+        card.style.display = tag === 'all' || cardTags.includes(tag) ? '' : 'none';
+      });
+    });
+  });
+</script>

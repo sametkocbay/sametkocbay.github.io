@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12;color:#e8eaf0;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#e8eaf0;text-decoration:none}
+a:hover{color:#6ee7dc}
+::selection{background:rgba(110,231,220,.25)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+</style>
+</helmet>
+<nav style="position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(110,231,220,.14);background:rgba(11,13,18,.92);backdrop-filter:blur(10px)">
+  <div style="margin:0 auto;max-width:1280px;padding:0 40px;display:flex;height:60px;align-items:center;justify-content:space-between;gap:16px">
+    <a href="1b Home.dc.html" style="font:600 13px 'IBM Plex Mono',monospace;white-space:nowrap"><span style="color:#6ee7dc">~/</span>samet-kocbay</a>
+    <div style="display:flex;gap:26px;font:400 12.5px 'IBM Plex Mono',monospace">
+      <a href="1b Home.dc.html" style="color:#6ee7dc">index</a>
+      <a href="1b Projects.dc.html" style="color:#8b93a5">projects</a>
+      <a href="1b Blog.dc.html" style="color:#8b93a5">blog</a>
+      <a href="#experience" style="color:#8b93a5">experience</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <a href="https://github.com/sametkocbay" aria-label="GitHub" style="color:#8b93a5;display:flex" style-hover="color:#6ee7dc">
+        <svg viewBox="0 0 24 24" style="height:18px;width:18px;fill:currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58l-.01-2.05c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.08 1.84 2.82 1.31 3.5 1 .11-.79.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.9 0-1.3.47-2.37 1.24-3.2-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.22a11.4 11.4 0 0 1 6 0c2.28-1.54 3.29-1.22 3.29-1.22.66 1.65.24 2.87.12 3.17.77.83 1.24 1.9 1.24 3.2 0 4.58-2.81 5.59-5.49 5.89.43.38.82 1.11.82 2.24l-.01 3.32c0 .32.21.69.82.57A12 12 0 0 0 12 .5z"></path></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/samet-kocbay/" aria-label="LinkedIn" style="color:#8b93a5;display:flex" style-hover="color:#6ee7dc">
+        <svg viewBox="0 0 24 24" style="height:18px;width:18px;fill:currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.58c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.68H9.35V9h3.4v1.56h.05c.47-.9 1.63-1.86 3.35-1.86 3.59 0 4.25 2.36 4.25 5.43v6.32zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77A1.77 1.77 0 0 0 0 1.77v20.46C0 23.2.8 24 1.77 24h20.46A1.77 1.77 0 0 0 24 22.23V1.77A1.77 1.77 0 0 0 22.23 0z"></path></svg>
+      </a>
+      <a href="uploads/cv.pdf" style="font:500 11.5px 'IBM Plex Mono',monospace;border:1px solid rgba(110,231,220,.5);color:#6ee7dc;padding:7px 14px;border-radius:4px;white-space:nowrap" style-hover="background:rgba(110,231,220,.08)">cv.pdf ↓</a>
+    </div>
+  </div>
+</nav>
+<header style="position:relative;height:560px;border-bottom:1px solid rgba(110,231,220,.14);overflow:hidden">
+  <canvas id="heroMesh" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+  <div id="heroPhotoTip" style="position:absolute;left:0;top:0;z-index:30;width:300px;border:1px solid rgba(255,107,107,.5);border-radius:6px;background:#11141b;padding:8px;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s;pointer-events:none;box-shadow:0 12px 32px rgba(0,0,0,.5)">
+    <img id="heroPhotoTipImg" src="uploads/Me_hiking.jpeg" alt="Photo of Samet" style="width:100%;height:200px;object-fit:cover;border-radius:4px;display:block">
+    <p id="heroPhotoTipCap" style="margin:8px 2px 2px;font:400 10.5px/1.5 'IBM Plex Mono',monospace;color:#8b93a5"># somewhere in the bavarian alps</p>
+  </div>
+  <div style="position:relative;margin:0 auto;max-width:1280px;padding:0 40px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none">
+    <div style="padding-bottom:52px;animation:fadeUp .55s ease-out both">
+      <h1 style="margin:0;font-size:66px;line-height:1.02;font-weight:700;letter-spacing:-.02em;color:#e8eaf0">Samet Kocbay</h1>
+      <p style="margin:14px 0 0;font:400 15.5px/1.65 'IBM Plex Mono',monospace;color:#8b93a5;max-width:640px">M.Sc. Computational Science &amp; Engineering @ TUM.<br>Physics-based simulation <span style="color:#6ee7dc">⇄</span> machine learning.</p>
+      <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px">
+        <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#8b93a5;border:1px solid rgba(139,147,165,.3);border-radius:4px;padding:5px 10px;white-space:nowrap">numerical-methods</span>
+        <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#8b93a5;border:1px solid rgba(139,147,165,.3);border-radius:4px;padding:5px 10px;white-space:nowrap">scientific-computing</span>
+        <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#8b93a5;border:1px solid rgba(139,147,165,.3);border-radius:4px;padding:5px 10px;white-space:nowrap">machine-learning</span>
+        <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#8b93a5;border:1px solid rgba(139,147,165,.3);border-radius:4px;padding:5px 10px;white-space:nowrap">physics</span>
+      </div>
+      <div style="margin-top:26px;display:flex;gap:12px;pointer-events:auto">
+        <a href="1b Projects.dc.html" style="font:500 12.5px 'IBM Plex Mono',monospace;background:#6ee7dc;color:#0b0d12;padding:11px 20px;border-radius:4px;white-space:nowrap" style-hover="background:#8ff0e6;color:#0b0d12">./explore-research</a>
+        <a href="uploads/cv.pdf" style="font:500 12.5px 'IBM Plex Mono',monospace;border:1px solid rgba(139,147,165,.4);color:#e8eaf0;padding:11px 20px;border-radius:4px;white-space:nowrap" style-hover="border-color:#6ee7dc;color:#6ee7dc">cv.pdf</a>
+      </div>
+      <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:20px;font:400 12px 'IBM Plex Mono',monospace;color:#465064;pointer-events:auto">
+        <span>munich, germany</span>
+        <a href="mailto:samet.kocbay@tum.de" style="color:#465064" style-hover="color:#6ee7dc">samet.kocbay (at) tum (dot) de</a>
+        <a href="https://github.com/sametkocbay" style="color:#465064" style-hover="color:#6ee7dc">github</a>
+        <a href="https://www.linkedin.com/in/samet-kocbay/" style="color:#465064" style-hover="color:#6ee7dc">linkedin</a>
+      </div>
+    </div>
+  </div>
+  <span style="position:absolute;right:40px;top:26px;font:400 10px 'IBM Plex Mono',monospace;color:rgba(139,147,165,.55);text-align:right;pointer-events:none">graph: gravity sheet<br>cursor = heavy planet · <span style="color:rgba(255,107,107,.8)">red nodes = photos</span></span>
+</header>
+<main style="margin:0 auto;max-width:1280px;padding:0 40px">
+  <section id="projects" style="padding:72px 0 8px">
+    <header style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:28px">
+      <div>
+        <p style="margin:0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">ls ./research --featured</p>
+        <h2 style="margin:10px 0 0;font-size:34px;font-weight:700;letter-spacing:-.015em;color:#e8eaf0">Research highlights</h2>
+      </div>
+      <a href="1b Projects.dc.html" style="font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc;white-space:nowrap">→ all projects</a>
+    </header>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
+        <a href="{{ p.href }}" style="border:1px solid rgba(139,147,165,.22);border-radius:6px;overflow:hidden;background:#11141b;display:flex;flex-direction:column;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(110,231,220,.5);transform:translateY(-3px)">
+          <div style="position:relative;height:150px;background:#0e1524;border-bottom:1px solid rgba(139,147,165,.22);overflow:hidden">
+            <div style="position:absolute;inset:0;background-color:#0e1524;background-image:{{ p.bgImage }};background-size:cover;background-position:center;opacity:.9"></div>
+            <sc-if value="{{ p.noImage }}" hint-placeholder-val="{{ false }}">
+              <div style="height:100%;display:flex;align-items:center;justify-content:center;background-image:linear-gradient(rgba(110,231,220,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(110,231,220,.05) 1px,transparent 1px);background-size:20px 20px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#465064">{{ p.imageLabel }}</span></div>
+            </sc-if>
+          </div>
+          <div style="padding:18px 20px;display:flex;flex-direction:column;flex:1">
+            <p style="margin:0;font:400 10.5px 'IBM Plex Mono',monospace;color:#6ee7dc">[{{ p.year }}] {{ p.tagline }}</p>
+            <h3 style="margin:7px 0 0;font-size:18px;line-height:1.25;font-weight:600;color:#e8eaf0">{{ p.title }}</h3>
+            <p style="margin:8px 0 0;font:400 12.5px/1.6 'IBM Plex Mono',monospace;color:#8b93a5">{{ p.description }}</p>
+            <p style="margin:auto 0 0;padding-top:14px;font:400 11px 'IBM Plex Mono',monospace;color:#465064">cat {{ p.slug }}.md →</p>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+  <section id="blog" style="padding:72px 0 8px">
+    <header style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:28px">
+      <div>
+        <p style="margin:0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">tail -f blog.log</p>
+        <h2 style="margin:10px 0 0;font-size:34px;font-weight:700;letter-spacing:-.015em;color:#e8eaf0">Notes</h2>
+      </div>
+      <a href="1b Blog.dc.html" style="font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc;white-space:nowrap">→ all posts</a>
+    </header>
+    <div style="border:1px solid rgba(110,231,220,.25);border-radius:6px;background:rgba(110,231,220,.03)">
+      <sc-for list="{{ posts }}" as="post" hint-placeholder-count="2">
+        <a href="{{ post.href }}" style="display:flex;align-items:baseline;gap:24px;padding:18px 24px;border-bottom:1px solid rgba(139,147,165,.15)" style-hover="background:rgba(110,231,220,.05)">
+          <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#465064;white-space:nowrap">{{ post.date }}</span>
+          <span style="font:500 15px 'Space Grotesk',sans-serif;color:#e8eaf0;flex:1">{{ post.title }}</span>
+          <span style="font:400 11px 'IBM Plex Mono',monospace;color:#6ee7dc;white-space:nowrap">{{ post.tag }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+  <section id="stack" style="padding:72px 0 8px">
+    <p style="margin:0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">cat /proc/skills</p>
+    <h2 style="margin:10px 0 28px;font-size:34px;font-weight:700;letter-spacing:-.015em;color:#e8eaf0">Tech stack</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <sc-for list="{{ techGroups }}" as="g" hint-placeholder-count="4">
+        <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;background:#11141b;padding:20px 24px">
+          <p style="margin:0;font:500 12px 'IBM Plex Mono',monospace;color:#6ee7dc">{{ g.path }}</p>
+          <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ g.items }}" as="item" hint-placeholder-count="6">
+              <span style="font:400 12px 'IBM Plex Mono',monospace;color:#8b93a5;border:1px solid rgba(139,147,165,.3);border-radius:4px;padding:5px 10px" style-hover="color:#e8eaf0;border-color:rgba(110,231,220,.5)">{{ item }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  <section id="experience" style="padding:72px 0 8px">
+    <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:48px">
+      <div>
+        <p style="margin:0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">git log --work</p>
+        <h2 style="margin:10px 0 28px;font-size:34px;font-weight:700;letter-spacing:-.015em;color:#e8eaf0">Experience</h2>
+        <div style="position:relative;display:flex;flex-direction:column;gap:0" style-before="content:'';position:absolute;top:8px;bottom:8px;left:5px;width:1px;background:rgba(139,147,165,.25)">
+          <sc-for list="{{ experience }}" as="e" hint-placeholder-count="5">
+            <div style="position:relative;padding:0 0 32px 32px">
+              <span style="position:absolute;left:0;top:6px;width:11px;height:11px;border-radius:50%;background:#0b0d12;border:2px solid #6ee7dc;box-sizing:border-box" aria-hidden="true"></span>
+              <p style="margin:0;font:400 11px 'IBM Plex Mono',monospace;color:#465064">{{ e.dates }}</p>
+              <h3 style="margin:6px 0 0;font-size:19px;font-weight:600;color:#e8eaf0">{{ e.company }}</h3>
+              <p style="margin:4px 0 0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">{{ e.roleLine }}</p>
+              <ul style="margin:12px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font:400 13px/1.6 'IBM Plex Mono',monospace;color:#8b93a5">
+                <sc-for list="{{ e.bullets }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for>
+              </ul>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div id="education">
+          <p style="margin:0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">git log --education</p>
+          <h2 style="margin:10px 0 28px;font-size:34px;font-weight:700;letter-spacing:-.015em;color:#e8eaf0">Education</h2>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <sc-for list="{{ education }}" as="e" hint-placeholder-count="2">
+              <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;background:#11141b;padding:20px 24px">
+                <p style="margin:0;font:400 11px 'IBM Plex Mono',monospace;color:#465064">{{ e.dates }}</p>
+                <h3 style="margin:6px 0 0;font-size:18px;font-weight:600;color:#e8eaf0">{{ e.degree }}</h3>
+                <p style="margin:5px 0 0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">{{ e.school }}</p>
+                <ul style="margin:12px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font:400 12.5px/1.6 'IBM Plex Mono',monospace;color:#8b93a5">
+                  <sc-for list="{{ e.highlights }}" as="h" hint-placeholder-count="1"><li>{{ h }}</li></sc-for>
+                </ul>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="margin-top:40px">
+          <p style="margin:0;font:400 12px 'IBM Plex Mono',monospace;color:#6ee7dc">cat about/personal.yml</p>
+          <h2 style="margin:10px 0 20px;font-size:24px;font-weight:700;color:#e8eaf0">Personal</h2>
+          <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;background:#11141b;padding:20px 24px;font:400 12.5px/2 'IBM Plex Mono',monospace">
+            <p style="margin:0;color:#465064">languages:</p>
+            <p style="margin:0;color:#8b93a5;padding-left:16px">- german <span style="color:#465064"># native</span><br>- english <span style="color:#465064"># C1 · TOEFL 111/120</span><br>- turkish</p>
+            <p style="margin:8px 0 0;color:#465064">passions:</p>
+            <p style="margin:0;color:#8b93a5;padding-left:16px">- olympic wrestling <span style="color:#465064"># 2× german national champion · multiple-time landesmeister</span><br>- cycling<br>- hiking / climbing</p>
+          </div>
+          <figure style="margin:16px 0 0">
+            <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;overflow:hidden;background:#0e1524"><img src="uploads/Me_hiking.jpeg" style="width:100%;height:300px;object-fit:cover;object-position:50% 72%;display:block" alt="Samet hiking in the snowy Bavarian Alps"></div>
+            <figcaption style="margin-top:8px;font:400 11px 'IBM Plex Mono',monospace;color:#465064"># somewhere in the bavarian alps</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer style="margin-top:72px;border-top:1px solid rgba(110,231,220,.14)">
+  <div style="margin:0 auto;max-width:1280px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:400 12px 'IBM Plex Mono',monospace;color:#465064">
+    <p style="margin:0">© 2026 samet kocbay · munich</p>
+    <div style="display:flex;gap:20px">
+      <a href="https://github.com/sametkocbay" style="color:#465064" style-hover="color:#6ee7dc">github</a>
+      <a href="https://www.linkedin.com/in/samet-kocbay/" style="color:#465064" style-hover="color:#6ee7dc">linkedin</a>
+      <a href="mailto:samet.kocbay@tum.de" style="color:#465064" style-hover="color:#6ee7dc">email</a>
+      <a href="uploads/cv.pdf" style="color:#6ee7dc">cv.pdf ↓</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;meshDensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:18,&quot;min&quot;:12,&quot;max&quot;:40,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero mesh&quot;},&quot;mouseForce&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:14,&quot;min&quot;:8,&quot;max&quot;:80,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero mesh&quot;},&quot;idleMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero mesh&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const withBg = p => ({ ...p, bgImage: p.image ? "url('" + p.image + "')" : 'none', href: ({'pde-transformer':'1b Project Detail.dc.html','fusion-research':'1b Detail Fusion.dc.html','ka-raceing':'1b Detail KA RaceIng.dc.html','gp-acoustics':'1b Detail GP Acoustics.dc.html','thermal-nn':'1b Detail Thermal NN.dc.html','pinns':'1b Detail PINNs.dc.html'})[p.slug] || '1b Projects.dc.html' });
+    return {
+      projects: [
+        { slug: 'fusion-research', title: 'Fusion Research', year: '2025', tagline: 'fusion / mhd', image: 'uploads/Reactor_wendelstein_greifswald.jpeg', noImage: false, description: "Master's thesis: JOREK \u21c4 CARIDDI free-boundary coupling for stellarator MHD." },
+        { slug: 'ka-raceing', title: 'Formula Student — KA RaceIng', year: '2023', tagline: 'aerodynamics / cfd', image: 'uploads/karacein.jpg', noImage: false, description: 'Head of Aerodynamics: 13-person team, +14% downforce via RANS-based CFD.' },
+        { slug: 'gp-acoustics', title: 'Gaussian Process in Acoustics', year: '2024', tagline: 'surrogate-modeling', image: 'assets/gp-posterior.png', noImage: false, description: 'GP surrogate for acoustic simulations at BMW — outperformed prior internal models.' },
+        { slug: 'thermal-nn', title: 'Thermal NN for Rotor Temperature', year: '2024', tagline: 'deep-learning', image: 'assets/wrc-car.jpg', noImage: false, description: "Physics-structured RNN estimating rotor temperature in a WRC motor, deployed on the ECU." },
+        { slug: 'pinns', title: 'Physics-Informed Neural Networks', year: '2023', tagline: 'fluid-dynamics', image: 'uploads/pIV.jpg', noImage: false, description: 'Inverse Navier–Stokes: reconstructing velocity/pressure fields from sparse PIV data.' },
+        { slug: 'pde-transformer', title: 'Review on PDE-Transformer', year: '2025', tagline: 'scientific-ml', image: 'assets/energy-spectrum.png', noImage: false, description: 'Noise robustness of a PDE foundation model, judged by energy spectra & enstrophy.' }
+      ].map(withBg),
+      posts: [
+        { date: '2026-05-02', title: 'Barnes–Hut in C++: OpenMP/AVX-512 vs MPI', tag: 'hpc', href: '1b Post Barnes-Hut.dc.html' }
+      ],
+      techGroups: [
+        { path: '/skills/programming', items: ['Python','C++','Fortran','MATLAB','Bash','OpenMP','MPI','Linux'] },
+        { path: '/skills/ml-sciml', items: ['PyTorch','GPyTorch','PINNs','Neural Operators','Gaussian Processes'] },
+        { path: '/skills/cae-cfd', items: ['STAR-CCM+','OpenFOAM','RANS / k-\u03c9 SST','Meshing','FEM','FVM','Composite Optimization'] },
+        { path: '/skills/domains', items: ['Scientific Computing','Scientific ML','Computational Physics','Fluid Dynamics','Fusion / Plasma','Numerical Methods'] }
+      ],
+      experience: [
+        { company: 'Max Planck Institute for Plasma Physics', dates: 'oct 2025 — sep 2026', roleLine: 'working student / thesis · munich', bullets: ['Self-consistent boundary coupling for MHD and electromagnetic interactions in fusion plasmas.','Implementing methods in the nonlinear MHD code JOREK to analyze magnetic-island behavior.'] },
+        { company: 'BMW Group', dates: 'oct 2024 — sep 2025', roleLine: 'working student · munich', bullets: ['Shipped features for the production FEM simulation pipeline while in active use.','End-to-end automation assembling full chassis models — connections, meshing, part data.','Surrogate model for structural parameters \u2192 frequency responses; >40% accuracy gain with multi-task GPs, ~80% cost reduction via latent representations.'] },
+        { company: 'Compact Dynamics', dates: 'mar 2024 — sep 2024', roleLine: 'bachelor thesis · starnberg', bullets: ['RNN-based thermal neural network for rotor-temperature estimation, 3–6 °C error.','Real-time inference on an embedded control unit, with back-EMF corrections.'] },
+        { company: 'Institute of Fluid Mechanics (KIT)', dates: 'jul 2023 — dec 2023', roleLine: 'student assistant · karlsruhe', bullets: ['Reconstructed velocity/pressure fields from sparse PIV measurements using PINNs.'] },
+        { company: 'Formula Student (KA RaceIng)', dates: 'oct 2021 — sep 2023', roleLine: 'head of aerodynamics · karlsruhe', bullets: ['Led a 13-person team over a full aero development cycle, CFD to manufacturing.','+14% downforce via RANS-based CFD (k-\u03c9 SST); meshing, y+ control, grid convergence.'] }
+      ],
+      education: [
+        { degree: 'M.Sc. Computational Science and Engineering', dates: 'oct 2024 — apr 2027', school: 'Technical University of Munich (TUM)', highlights: ['Focus: machine learning for physics and numerical methods.','Current grade: 1.5 (German scale).'] },
+        { degree: 'B.Sc. Mechanical Engineering', dates: 'oct 2019 — sep 2024', school: 'Karlsruhe Institute of Technology (KIT)', highlights: ['Head of Aerodynamics, Formula Student team KA-RaceIng.'] }
+      ]
+    };
+  }
+  componentDidMount() {
+    const cv = document.getElementById('heroMesh');
+    if (!cv) return;
+    const density = this.props.meshDensity ?? 22;
+    const force = this.props.mouseForce ?? 34;
+    const idle = this.props.idleMotion ?? true;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = cv.clientWidth, h = cv.clientHeight;
+    cv.width = w * dpr; cv.height = h * dpr;
+    const ctx = cv.getContext('2d'); ctx.scale(dpr, dpr);
+    const cols = density, rows = Math.max(6, Math.round(density * h / w));
+    const pts = [];
+    for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) {
+      const hx = (i / cols) * w, hy = (j / rows) * h;
+      pts.push({ hx, hy, x: hx, y: hy, vx: 0, vy: 0, i, j });
+    }
+    const photos = [
+      { fi: 0.16, fj: 0.3, src: 'uploads/Me_hiking.jpeg', cap: '# snow hiking around the rotwand' },
+      { fi: 0.38, fj: 0.62, src: 'uploads/grreece.jpeg', cap: '# meeting my old friend sokrates on the akropolis' },
+      { fi: 0.62, fj: 0.28, src: 'uploads/Cycling.jpeg', cap: '# race finish with nathan in feltre, italy' },
+      { fi: 0.84, fj: 0.55, src: 'uploads/FS_CZECH_Win.jpeg', cap: '# celebrating our achievements in czech' }
+    ].map(ph => { const im = new Image(); im.src = ph.src; ph.img = im; const p = pts[Math.round(ph.fj * rows) * (cols + 1) + Math.round(ph.fi * cols)]; p.photo = ph; return p; });
+    const tip = document.getElementById('heroPhotoTip');
+    const tipImg = document.getElementById('heroPhotoTipImg');
+    const tipCap = document.getElementById('heroPhotoTipCap');
+    let hovered = null;
+    const mouse = { x: -9999, y: -9999 };
+    const onMove = e => {
+      const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+      let best = null, bd = 28 * 28;
+      for (const p of photos) { const d2 = (p.x - mouse.x) ** 2 + (p.y - mouse.y) ** 2; if (d2 < bd) { bd = d2; best = p; } }
+      if (best !== hovered) {
+        hovered = best;
+        cv.parentElement.style.cursor = best ? 'pointer' : '';
+        if (best) {
+          if (tipImg.src !== best.photo.img.src) { tipImg.style.opacity = '0'; tipImg.src = best.photo.src; (best.photo.img.complete ? Promise.resolve() : best.photo.img.decode().catch(() => {})).then(() => { tipImg.style.opacity = '1'; }); }
+          tipCap.textContent = best.photo.cap;
+          tip.style.opacity = '1'; tip.style.transform = 'translateY(0)';
+        } else { tip.style.opacity = '0'; tip.style.transform = 'translateY(4px)'; }
+      }
+      if (hovered) {
+        const tx = Math.min(Math.max(hovered.x - 150, 8), w - 308);
+        const above = hovered.y > 310;
+        tip.style.left = tx + 'px';
+        tip.style.top = (above ? hovered.y - 278 : hovered.y + 18) + 'px';
+      }
+    };
+    const onLeave = () => { mouse.x = -9999; mouse.y = -9999; hovered = null; tip.style.opacity = '0'; cv.parentElement.style.cursor = ''; };
+    cv.parentElement.addEventListener('mousemove', onMove);
+    cv.parentElement.addEventListener('mouseleave', onLeave);
+    let t = 0;
+    const P = (i, j) => pts[j * (cols + 1) + i];
+    const step = () => {
+      t++;
+      ctx.clearRect(0, 0, w, h);
+      for (const p of pts) {
+        const wob = idle ? Math.sin(t * 0.012 + p.i * 0.7 + p.j * 1.3) * 1.4 : 0;
+        let fx = (p.hx - p.x) * 0.045, fy = (p.hy + wob - p.y) * 0.045;
+        const dx = mouse.x - p.x, dy = mouse.y - p.y;
+        const d2 = dx * dx + dy * dy, r = 220;
+        if (d2 < r * r && d2 > 0.01) { const d = Math.sqrt(d2), f = (1 - d / r) * force / Math.max(d, 30); fx += dx * f * 0.12; fy += dy * f * 0.12; }
+        p.vx = (p.vx + fx) * 0.86; p.vy = (p.vy + fy) * 0.86;
+        p.x += p.vx; p.y += p.vy;
+      }
+      ctx.lineWidth = 1;
+      for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) {
+        const a = P(i, j);
+        const al = 0.09 + Math.min(0.5, Math.hypot(a.x - a.hx, a.y - a.hy) / 30);
+        ctx.strokeStyle = 'rgba(110,231,220,' + al + ')';
+        if (i < cols) { const b = P(i + 1, j); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+        if (j < rows) { const c = P(i, j + 1); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(c.x, c.y); ctx.stroke(); }
+      }
+      for (const p of pts) {
+        const disp = Math.hypot(p.x - p.hx, p.y - p.hy);
+        if (p.photo) {
+          const pulse = 1 + Math.sin(t * 0.05) * 0.25, hot = p === hovered;
+          ctx.fillStyle = 'rgba(255,107,107,' + (hot ? .25 : .14) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, (hot ? 14 : 10) * pulse, 0, 6.2832); ctx.fill();
+          ctx.fillStyle = hot ? '#ff8f8f' : '#ff6b6b';
+          ctx.beginPath(); ctx.arc(p.x, p.y, hot ? 5 : 3.6, 0, 6.2832); ctx.fill();
+        } else {
+          ctx.fillStyle = 'rgba(110,231,220,' + (0.3 + Math.min(0.65, disp / 20)) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, 1.2 + Math.min(2.4, disp / 8), 0, 6.2832); ctx.fill();
+        }
+      }
+      this._raf = requestAnimationFrame(step);
+    };
+    step();
+  }
+  componentWillUnmount() { cancelAnimationFrame(this._raf); }
+}
+</script>
+</body>
+</html>

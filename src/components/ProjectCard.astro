@@ -4,83 +4,32 @@ import { withBase } from '../utils/withBase';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  variant: 'home' | 'list';
 }
 
-const { project } = Astro.props;
-const { title, description, tags, image, date } = project.data;
-const links = project.data.links ?? {};
-const tagDataset = tags.map((tag) => tag.toLowerCase()).join('|');
+const { project, variant } = Astro.props;
+const { title, year, tagline, cardSlug, summary, description, tags, image } = project.data;
+const href = withBase(`/projects/${project.slug}/`);
+const bg = `background-image:url('${withBase(image)}')`;
 ---
 
-<article
-  class="project-card surface-card group flex h-full cursor-pointer flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:shadow-card"
-  data-project-card
-  data-project-url={withBase(`/projects/${project.slug}`)}
-  data-tags={tagDataset}
-  tabindex="0"
-  role="link"
->
-  <div class="relative">
-    <img src={withBase(image)} alt={title} class="h-52 w-full border-b border-border object-cover" loading="lazy" />
-    <span class="absolute right-3 top-3 rounded-md border border-border bg-surface/95 px-2 py-1 font-mono text-[11px] text-muted">
-      {date.getFullYear()}
-    </span>
+<a href={href} class="pcard" data-card data-tags={tags.join(',')}>
+  <div class={`pcard-media${variant === 'list' ? ' tall' : ''}`}>
+    <div class="bg" style={bg}></div>
+    {variant === 'list' && <span class="pcard-year">{year}</span>}
   </div>
-
-  <div class="flex flex-1 flex-col p-5 sm:p-6">
-    <h3 class="font-display text-2xl leading-tight text-ink">{title}</h3>
-    <p class="mt-2 text-sm leading-6 text-muted" data-project-description>{description}</p>
-
-    <div class="mt-4 flex flex-wrap gap-2">
-      {tags.map((tag) => (
-        <span class="rounded-md border border-border bg-bg px-2 py-1 font-mono text-[11px] text-muted">{tag}</span>
-      ))}
-    </div>
-
-    <div class="mt-auto flex flex-wrap gap-4 pt-6 text-sm">
-      <a href={withBase(`/projects/${project.slug}`)} class="font-semibold text-accent hover:underline">Details</a>
-      {links.github && (
-        <a href={links.github} target="_blank" rel="noreferrer" class="font-semibold text-accent hover:underline">Code</a>
-      )}
-      {links.demo && (
-        <a href={links.demo} target="_blank" rel="noreferrer" class="font-semibold text-accent hover:underline">Demo</a>
-      )}
-      {links.writeup && (
-        <a href={links.writeup} target="_blank" rel="noreferrer" class="font-semibold text-accent hover:underline">Write-up</a>
-      )}
-    </div>
+  <div class="pcard-body">
+    {variant === 'home' && <p class="pcard-meta">[{year}] {tagline}</p>}
+    <h3 class={`pcard-title${variant === 'list' ? ' mt0' : ''}`}>{title}</h3>
+    <p class="pcard-desc">{variant === 'home' ? summary : description}</p>
+    {variant === 'home' ? (
+      <p class="pcard-foot">cat {cardSlug}.md →</p>
+    ) : (
+      <div class="pcard-tags">
+        {tags.map((tag) => (
+          <span class="tag-pill">{tag}</span>
+        ))}
+      </div>
+    )}
   </div>
-</article>
-
-<script>
-  if (!window.__projectCardNavigationBound) {
-    const isInteractive = (target) => target instanceof Element && !!target.closest('a, button, input, select, textarea, label');
-
-    document.addEventListener('click', (event) => {
-      const target = event.target;
-      if (isInteractive(target)) return;
-
-      const card = target instanceof Element ? target.closest('[data-project-url]') : null;
-      const href = card?.getAttribute('data-project-url');
-      if (!href) return;
-
-      window.location.href = href;
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (!(event.target instanceof Element)) return;
-      if (isInteractive(event.target)) return;
-
-      const card = event.target.closest('[data-project-url]');
-      const href = card?.getAttribute('data-project-url');
-      if (!href) return;
-
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        window.location.href = href;
-      }
-    });
-
-    window.__projectCardNavigationBound = true;
-  }
-</script>
+</a>

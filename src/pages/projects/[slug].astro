@@ -1,11 +1,9 @@
 ---
-import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
-import SectionHeader from '../../components/SectionHeader.astro';
 import { withBase } from '../../utils/withBase';
 
 export async function getStaticPaths() {
@@ -20,40 +18,44 @@ interface Props {
   project: CollectionEntry<'projects'>;
 }
 
-const { project } = Astro.props as Props;
+const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, description, date, tags, image } = project.data;
-const links = project.data.links ?? {};
+const { detailTitle, metaLine, dek, detailTags, codeUrl, heroImage, heroAlt, heroCaption, prevSlug, nextSlug } =
+  project.data;
 ---
 
-<BaseLayout title={`${title} | Project`} description={description}>
-  <Navbar />
-  <main class="container-page section-spacing">
-    <a href={withBase('/projects')} class="text-sm font-semibold text-accent hover:underline">← Back to Projects</a>
-    <SectionHeader title={title} subtitle={description} />
-
-    <article class="surface-card overflow-hidden">
-      <img src={withBase(image)} alt={title} class="h-56 w-full border-b border-border object-cover sm:h-80" />
-      <div class="p-6 sm:p-8">
-        <p class="font-mono text-[11px] uppercase tracking-wide text-muted">{date.getFullYear()}</p>
-
-        <div class="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span class="rounded-md border border-border bg-bg px-2 py-1 font-mono text-[11px] text-muted">{tag}</span>
-          ))}
-        </div>
-
-        <div class="mt-5 flex flex-wrap gap-4 text-sm">
-          {links.github && <a href={links.github} class="font-semibold text-accent hover:underline" target="_blank" rel="noreferrer">Code</a>}
-          {links.demo && <a href={links.demo} class="font-semibold text-accent hover:underline" target="_blank" rel="noreferrer">Demo</a>}
-          {links.writeup && <a href={links.writeup} class="font-semibold text-accent hover:underline" target="_blank" rel="noreferrer">Write-up</a>}
-        </div>
-
-        <div class="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-accent">
-          <Content />
-        </div>
+<BaseLayout title={`${detailTitle} | Samet Kocbay`} description={dek}>
+  <Navbar active="projects" />
+  <main class="container-narrow pb80">
+    <p class="crumb">
+      <a href={withBase('/projects/')}>~/projects</a> <span class="sep">/</span> {project.slug}.md
+    </p>
+    <header class="detail-head">
+      <p class="detail-meta">{metaLine}</p>
+      <h1 class="detail-title">{detailTitle}</h1>
+      <p class="detail-dek">{dek}</p>
+      <div class="detail-tags">
+        {detailTags.map((tag) => <span class="tag-pill">{tag}</span>)}
+        {codeUrl && <a href={codeUrl} class="tag-link">code →</a>}
       </div>
+    </header>
+    {heroImage && (
+      <figure class="hero-fig">
+        <div class="frame"><img src={withBase(heroImage)} alt={heroAlt} /></div>
+        <figcaption>{heroCaption}</figcaption>
+      </figure>
+    )}
+    <article class="article">
+      <Content />
     </article>
+    <div class="prevnext">
+      {prevSlug ? (
+        <a href={withBase(`/projects/${prevSlug}/`)} class="back">← prev: {prevSlug}.md</a>
+      ) : (
+        <a href={withBase('/projects/')} class="back">← back to projects</a>
+      )}
+      {nextSlug && <a href={withBase(`/projects/${nextSlug}/`)} class="next">next: {nextSlug}.md →</a>}
+    </div>
   </main>
   <Footer />
 </BaseLayout>

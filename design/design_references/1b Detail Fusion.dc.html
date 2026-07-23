@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12;color:#e8eaf0;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#6ee7dc;text-decoration:none}
+a:hover{color:#8ff0e6}
+::selection{background:rgba(110,231,220,.25)}
+</style>
+</helmet>
+<nav style="position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(110,231,220,.14);background:rgba(11,13,18,.92);backdrop-filter:blur(10px)">
+  <div style="margin:0 auto;max-width:1280px;padding:0 40px;display:flex;height:60px;align-items:center;justify-content:space-between;gap:16px">
+    <a href="1b Home.dc.html" style="font:600 13px 'IBM Plex Mono',monospace;color:#e8eaf0;white-space:nowrap"><span style="color:#6ee7dc">~/</span>samet-kocbay</a>
+    <div style="display:flex;gap:26px;font:400 12.5px 'IBM Plex Mono',monospace">
+      <a href="1b Home.dc.html" style="color:#8b93a5">index</a>
+      <a href="1b Projects.dc.html" style="color:#6ee7dc">projects</a>
+      <a href="1b Blog.dc.html" style="color:#8b93a5">blog</a>
+      <a href="1b Home.dc.html#experience" style="color:#8b93a5">experience</a>
+    </div>
+    <a href="uploads/cv.pdf" style="font:500 11.5px 'IBM Plex Mono',monospace;border:1px solid rgba(110,231,220,.5);color:#6ee7dc;padding:7px 14px;border-radius:4px;white-space:nowrap" style-hover="background:rgba(110,231,220,.08)">cv.pdf ↓</a>
+  </div>
+</nav>
+<main style="margin:0 auto;max-width:860px;padding:0 40px 80px">
+  <p style="margin:48px 0 0;font:400 12px 'IBM Plex Mono',monospace;color:#465064"><a href="1b Projects.dc.html" style="color:#465064" style-hover="color:#6ee7dc">~/projects</a> <span style="color:#6ee7dc">/</span> no-wall-bc-stellarators.md</p>
+  <header style="margin-top:28px;padding-bottom:32px;border-bottom:1px solid rgba(139,147,165,.22)">
+    <p style="margin:0;font:400 11px 'IBM Plex Mono',monospace;color:#6ee7dc">[2025–2026] fusion / mhd · master's thesis @ max planck institute for plasma physics</p>
+    <h1 style="margin:12px 0 0;font-size:42px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:#e8eaf0">Free-Boundary MHD for Stellarators</h1>
+    <p style="margin:14px 0 0;font:400 14px/1.65 'IBM Plex Mono',monospace;color:#8b93a5">A no-wall boundary condition for the nonlinear MHD code JOREK, verified on tokamaks and extended to stellarator configurations.</p>
+    <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:6px">
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">mhd</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">plasma-physics</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">fortran</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">hpc</span>
+    </div>
+  </header>
+  <figure style="margin:32px 0 0">
+    <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;overflow:hidden;background:#0e1524"><img src="uploads/Reactor_wendelstein_greifswald.jpeg" style="width:100%;display:block" alt="Wendelstein 7-X stellarator hall in Greifswald"></div>
+    <figcaption style="margin-top:10px;font:400 11.5px/1.6 'IBM Plex Mono',monospace;color:#465064">the Wendelstein 7-X stellarator in Greifswald — taken during our visit to IPP's second site.</figcaption>
+  </figure>
+  <article style="font-size:15.5px;line-height:1.75;color:#b6bdcb">
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Context</h2>
+    <p style="margin:16px 0 0"><strong style="color:#e8eaf0">JOREK</strong> is a nonlinear extended-MHD code used to simulate large-scale plasma instabilities in fusion devices. How the plasma boundary is treated matters: with an ideally conducting wall close to the plasma, many external instabilities are artificially stabilized. A <strong style="color:#e8eaf0">no-wall boundary condition</strong> — the wall pushed to infinity — is the opposite limit, and a prerequisite for studying how external modes behave in realistic geometries.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>What I built</h2>
+    <p style="margin:16px 0 0">I derived and implemented the no-wall extension of JOREK's free-boundary coupling: the vacuum region outside the plasma is treated as current-free, with continuity of the field across the plasma–vacuum interface,</p>
+    <div style="margin:16px 0 0;border:1px solid rgba(110,231,220,.25);border-radius:6px;background:#0e1524;padding:16px 22px;font:400 15px/1.9 'IBM Plex Mono',monospace;color:#6ee7dc;text-align:center;overflow-x:auto">∇ × B = 0,&nbsp;&nbsp;∇ · B = 0&nbsp;&nbsp;in Ω<sub>vac</sub>&nbsp;&nbsp;·&nbsp;&nbsp;⟦B · n⟧ = 0&nbsp;&nbsp;on ∂Ω<sub>p</sub></div>
+    <p style="margin:16px 0 0">The implementation was first verified against <strong style="color:#e8eaf0">validated tokamak cases</strong>, then extended to <strong style="color:#e8eaf0">stellarator configurations</strong> using three-dimensional equilibria from <strong style="color:#e8eaf0">GVEC</strong> — verifying the novel coupling in fully 3D geometry.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Status</h2>
+    <p style="margin:16px 0 0">Ongoing through September 2026 as my master's thesis at <strong style="color:#e8eaf0">IPP Garching</strong> — current work focuses on verification of the stellarator coupling against reference equilibria.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Publication</h2>
+    <p style="margin:16px 0 0">This work is part of the JOREK team effort reviewed in:</p>
+    <a href="https://doi.org/10.1088/1741-4326/ae6790" style="margin-top:16px;display:block;border:1px solid rgba(110,231,220,.25);border-radius:6px;background:#0e1524;padding:18px 22px" style-hover="border-color:rgba(110,231,220,.5)">
+      <p style="margin:0;font:400 11px 'IBM Plex Mono',monospace;color:#6ee7dc">[2026] Nuclear Fusion 66 116006 · doi:10.1088/1741-4326/ae6790</p>
+      <p style="margin:8px 0 0;font:600 15.5px/1.5 'Space Grotesk',sans-serif;color:#e8eaf0">Advances in 3D transient plasma dynamics and control through MHD and hybrid fluid-kinetic simulations with JOREK</p>
+      <p style="margin:8px 0 0;font:400 12px/1.6 'IBM Plex Mono',monospace;color:#8b93a5">Hoelzl, M., Schwarz, N., Huijsmans, G.T.A., … <strong style="color:#e8eaf0">Kocbay, S.</strong>, … et al.</p>
+    </a>
+  </article>
+  <div style="margin-top:56px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(139,147,165,.22);padding-top:24px;font:400 12px 'IBM Plex Mono',monospace">
+    <a href="1b Projects.dc.html" style="color:#8b93a5" style-hover="color:#6ee7dc">← back to projects</a>
+    <a href="1b Detail KA RaceIng.dc.html" style="color:#6ee7dc">next: ka-raceing-aero.md →</a>
+  </div>
+</main>
+<footer style="border-top:1px solid rgba(110,231,220,.14)">
+  <div style="margin:0 auto;max-width:1280px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:400 12px 'IBM Plex Mono',monospace;color:#465064">
+    <p style="margin:0">© 2026 samet kocbay · munich</p>
+    <div style="display:flex;gap:20px">
+      <a href="https://github.com/sametkocbay" style="color:#465064" style-hover="color:#6ee7dc">github</a>
+      <a href="https://www.linkedin.com/in/samet-kocbay/" style="color:#465064" style-hover="color:#6ee7dc">linkedin</a>
+      <a href="mailto:samet.kocbay@tum.de" style="color:#465064" style-hover="color:#6ee7dc">email</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+</body>
+</html>

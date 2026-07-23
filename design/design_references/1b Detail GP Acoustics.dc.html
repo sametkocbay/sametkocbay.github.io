@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12;color:#e8eaf0;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#6ee7dc;text-decoration:none}
+a:hover{color:#8ff0e6}
+::selection{background:rgba(110,231,220,.25)}
+</style>
+</helmet>
+<nav style="position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(110,231,220,.14);background:rgba(11,13,18,.92);backdrop-filter:blur(10px)">
+  <div style="margin:0 auto;max-width:1280px;padding:0 40px;display:flex;height:60px;align-items:center;justify-content:space-between;gap:16px">
+    <a href="1b Home.dc.html" style="font:600 13px 'IBM Plex Mono',monospace;color:#e8eaf0;white-space:nowrap"><span style="color:#6ee7dc">~/</span>samet-kocbay</a>
+    <div style="display:flex;gap:26px;font:400 12.5px 'IBM Plex Mono',monospace">
+      <a href="1b Home.dc.html" style="color:#8b93a5">index</a>
+      <a href="1b Projects.dc.html" style="color:#6ee7dc">projects</a>
+      <a href="1b Blog.dc.html" style="color:#8b93a5">blog</a>
+      <a href="1b Home.dc.html#experience" style="color:#8b93a5">experience</a>
+    </div>
+    <a href="uploads/cv.pdf" style="font:500 11.5px 'IBM Plex Mono',monospace;border:1px solid rgba(110,231,220,.5);color:#6ee7dc;padding:7px 14px;border-radius:4px;white-space:nowrap" style-hover="background:rgba(110,231,220,.08)">cv.pdf ↓</a>
+  </div>
+</nav>
+<main style="margin:0 auto;max-width:860px;padding:0 40px 80px">
+  <p style="margin:48px 0 0;font:400 12px 'IBM Plex Mono',monospace;color:#465064"><a href="1b Projects.dc.html" style="color:#465064" style-hover="color:#6ee7dc">~/projects</a> <span style="color:#6ee7dc">/</span> gp-acoustics-surrogates.md</p>
+  <header style="margin-top:28px;padding-bottom:32px;border-bottom:1px solid rgba(139,147,165,.22)">
+    <p style="margin:0;font:400 11px 'IBM Plex Mono',monospace;color:#6ee7dc">[2024–2025] surrogate-modeling · working student @ bmw group</p>
+    <h1 style="margin:12px 0 0;font-size:42px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:#e8eaf0">Gaussian Process Surrogates for Structural Acoustics</h1>
+    <p style="margin:14px 0 0;font:400 14px/1.65 'IBM Plex Mono',monospace;color:#8b93a5">Replacing expensive acoustic simulations with multi-task GP surrogates that map structural parameters to full frequency responses.</p>
+    <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:6px">
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">gaussian-processes</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">gpytorch</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">nvh</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">surrogate-modeling</span>
+    </div>
+  </header>
+  <figure style="margin:32px 0 0">
+    <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;overflow:hidden;background:#0e1524"><img src="assets/gp-posterior.png" style="width:100%;display:block" alt="Gaussian process posterior: mean, ±2σ band, samples, and observations"></div>
+    <figcaption style="margin-top:10px;font:400 11.5px/1.6 'IBM Plex Mono',monospace;color:#465064">gp regression in one picture — posterior mean, ±2σ uncertainty band, and function samples conditioned on observations.</figcaption>
+  </figure>
+  <article style="font-size:15.5px;line-height:1.75;color:#b6bdcb">
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>The problem</h2>
+    <p style="margin:16px 0 0">Acoustic and vibration behavior of vehicle structures is evaluated through simulations that are too expensive to run inside design-exploration loops. The task is naturally <strong style="color:#e8eaf0">operator-valued</strong>: a vector of structural parameters maps not to a scalar, but to an entire <strong style="color:#e8eaf0">frequency response function</strong>,</p>
+    <div style="margin:16px 0 0;border:1px solid rgba(110,231,220,.25);border-radius:6px;background:#0e1524;padding:16px 22px;font:400 15px/1.9 'IBM Plex Mono',monospace;color:#6ee7dc;text-align:center;overflow-x:auto">θ ∈ ℝ<sup>d</sup>&nbsp;&nbsp;⟼&nbsp;&nbsp;H(f; θ),&nbsp;&nbsp;f ∈ [f<sub>min</sub>, f<sub>max</sub>]</div>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Approach</h2>
+    <p style="margin:16px 0 0">I built surrogate models around <strong style="color:#e8eaf0">multi-task Gaussian Processes</strong>: correlated outputs across the frequency axis share statistical strength instead of being fit independently. To keep training tractable, the high-dimensional response is first compressed via <strong style="color:#e8eaf0">latent representation learning</strong>, and the GP operates in that low-dimensional space.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Results</h2>
+    <ul style="margin:16px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:12px">
+      <li><strong style="color:#e8eaf0">&gt;40% better prediction accuracy</strong> over the single-task baseline, from exploiting cross-frequency correlation.</li>
+      <li><strong style="color:#e8eaf0">80% lower computational cost</strong> via the latent-space formulation — fast enough for interactive parameter studies.</li>
+      <li><strong style="color:#e8eaf0">Calibrated uncertainty</strong> for free: GP posteriors tell engineers where the surrogate can be trusted and where new simulations are worth running.</li>
+    </ul>
+  </article>
+  <div style="margin-top:56px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(139,147,165,.22);padding-top:24px;font:400 12px 'IBM Plex Mono',monospace">
+    <a href="1b Detail KA RaceIng.dc.html" style="color:#8b93a5" style-hover="color:#6ee7dc">← prev: ka-raceing-aero.md</a>
+    <a href="1b Detail Thermal NN.dc.html" style="color:#6ee7dc">next: thermal-nn-rotor.md →</a>
+  </div>
+</main>
+<footer style="border-top:1px solid rgba(110,231,220,.14)">
+  <div style="margin:0 auto;max-width:1280px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:400 12px 'IBM Plex Mono',monospace;color:#465064">
+    <p style="margin:0">© 2026 samet kocbay · munich</p>
+    <div style="display:flex;gap:20px">
+      <a href="https://github.com/sametkocbay" style="color:#465064" style-hover="color:#6ee7dc">github</a>
+      <a href="https://www.linkedin.com/in/samet-kocbay/" style="color:#465064" style-hover="color:#6ee7dc">linkedin</a>
+      <a href="mailto:samet.kocbay@tum.de" style="color:#465064" style-hover="color:#6ee7dc">email</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12;color:#e8eaf0;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#6ee7dc;text-decoration:none}
+a:hover{color:#8ff0e6}
+::selection{background:rgba(110,231,220,.25)}
+</style>
+</helmet>
+<nav style="position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(110,231,220,.14);background:rgba(11,13,18,.92);backdrop-filter:blur(10px)">
+  <div style="margin:0 auto;max-width:1280px;padding:0 40px;display:flex;height:60px;align-items:center;justify-content:space-between;gap:16px">
+    <a href="1b Home.dc.html" style="font:600 13px 'IBM Plex Mono',monospace;color:#e8eaf0;white-space:nowrap"><span style="color:#6ee7dc">~/</span>samet-kocbay</a>
+    <div style="display:flex;gap:26px;font:400 12.5px 'IBM Plex Mono',monospace">
+      <a href="1b Home.dc.html" style="color:#8b93a5">index</a>
+      <a href="1b Projects.dc.html" style="color:#6ee7dc">projects</a>
+      <a href="1b Blog.dc.html" style="color:#8b93a5">blog</a>
+      <a href="1b Home.dc.html#experience" style="color:#8b93a5">experience</a>
+    </div>
+    <a href="uploads/cv.pdf" style="font:500 11.5px 'IBM Plex Mono',monospace;border:1px solid rgba(110,231,220,.5);color:#6ee7dc;padding:7px 14px;border-radius:4px;white-space:nowrap" style-hover="background:rgba(110,231,220,.08)">cv.pdf ↓</a>
+  </div>
+</nav>
+<main style="margin:0 auto;max-width:860px;padding:0 40px 80px">
+  <p style="margin:48px 0 0;font:400 12px 'IBM Plex Mono',monospace;color:#465064"><a href="1b Projects.dc.html" style="color:#465064" style-hover="color:#6ee7dc">~/projects</a> <span style="color:#6ee7dc">/</span> pinn-piv-reconstruction.md</p>
+  <header style="margin-top:28px;padding-bottom:32px;border-bottom:1px solid rgba(139,147,165,.22)">
+    <p style="margin:0;font:400 11px 'IBM Plex Mono',monospace;color:#6ee7dc">[2023] fluid-dynamics · student assistant @ kit institute of fluid mechanics</p>
+    <h1 style="margin:12px 0 0;font-size:42px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:#e8eaf0">PINNs for Sparse Flow Reconstruction</h1>
+    <p style="margin:14px 0 0;font:400 14px/1.65 'IBM Plex Mono',monospace;color:#8b93a5">Reconstructing full velocity and pressure fields from sparse PIV measurements by letting the Navier–Stokes equations fill in the gaps.</p>
+    <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:6px">
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">pinns</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">navier-stokes</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">piv</span>
+      <span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#465064;border:1px solid rgba(139,147,165,.25);border-radius:4px;padding:3px 7px;white-space:nowrap">inverse-problems</span>
+    </div>
+  </header>
+  <figure style="margin:32px 0 0">
+    <div style="border:1px solid rgba(139,147,165,.22);border-radius:6px;overflow:hidden;background:#0e1524"><img src="uploads/pIV.jpg" style="width:100%;display:block" alt="PIV measurement: laser sheet illuminating seeded flow"></div>
+    <figcaption style="margin-top:10px;font:400 11.5px/1.6 'IBM Plex Mono',monospace;color:#465064">the PIV setup — a laser sheet illuminates seeded flow through the test-section window.</figcaption>
+  </figure>
+  <article style="font-size:15.5px;line-height:1.75;color:#b6bdcb">
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>The problem</h2>
+    <p style="margin:16px 0 0"><strong style="color:#e8eaf0">Particle image velocimetry</strong> gives velocity only where the laser sheet and seeding cooperate — sparse, noisy, and with no pressure information at all. Densifying the measurement grid is expensive; pressure probes disturb the flow. The inverse problem: recover the full velocity <em>and</em> pressure field from what little the experiment provides.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Approach</h2>
+    <p style="margin:16px 0 0">A <strong style="color:#e8eaf0">physics-informed neural network</strong> represents the flow field as a continuous function and is trained on a composite loss: agreement with the sparse PIV data, plus the residuals of the incompressible Navier–Stokes equations evaluated by automatic differentiation,</p>
+    <div style="margin:16px 0 0;border:1px solid rgba(110,231,220,.25);border-radius:6px;background:#0e1524;padding:16px 22px;font:400 15px/1.9 'IBM Plex Mono',monospace;color:#6ee7dc;text-align:center;overflow-x:auto">L = L<sub>data</sub> + λ₁ ‖u·∇u + ∇p − ν∇²u‖² + λ₂ ‖∇·u‖²</div>
+    <p style="margin:16px 0 0">Pressure enters the loss only through the momentum residual — so the network learns a physically consistent pressure field <strong style="color:#e8eaf0">without a single pressure measurement</strong>.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Outcome</h2>
+    <p style="margin:16px 0 0">The reconstruction recovered coherent velocity and pressure fields from sparse inputs, <strong style="color:#e8eaf0">reducing the experimental measurement requirements</strong> — fewer PIV planes for the same insight. It was also my first encounter with scientific ML as a serious tool rather than a curiosity, and set the direction for everything since.</p>
+  </article>
+  <div style="margin-top:56px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(139,147,165,.22);padding-top:24px;font:400 12px 'IBM Plex Mono',monospace">
+    <a href="1b Detail Thermal NN.dc.html" style="color:#8b93a5" style-hover="color:#6ee7dc">← prev: thermal-nn-rotor.md</a>
+    <a href="1b Project Detail.dc.html" style="color:#6ee7dc">next: pde-transformer.md →</a>
+  </div>
+</main>
+<footer style="border-top:1px solid rgba(110,231,220,.14)">
+  <div style="margin:0 auto;max-width:1280px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:400 12px 'IBM Plex Mono',monospace;color:#465064">
+    <p style="margin:0">© 2026 samet kocbay · munich</p>
+    <div style="display:flex;gap:20px">
+      <a href="https://github.com/sametkocbay" style="color:#465064" style-hover="color:#6ee7dc">github</a>
+      <a href="https://www.linkedin.com/in/samet-kocbay/" style="color:#465064" style-hover="color:#6ee7dc">linkedin</a>
+      <a href="mailto:samet.kocbay@tum.de" style="color:#465064" style-hover="color:#6ee7dc">email</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+</body>
+</html>

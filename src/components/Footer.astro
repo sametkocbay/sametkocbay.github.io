@@ -1,17 +1,23 @@
 ---
 import { siteData } from '../data/site';
+import { withBase } from '../utils/withBase';
 
-const cvUrl = `${import.meta.env.BASE_URL}${siteData.cvPath}`;
+interface Props {
+  showCv?: boolean;
+  spaced?: boolean;
+}
+
+const { showCv = false, spaced = false } = Astro.props;
 ---
 
-<footer class="mt-20 border-t border-border">
-  <div class="container-page flex flex-col items-start justify-between gap-4 py-10 text-sm text-muted sm:flex-row sm:items-center">
-    <p>© {new Date().getFullYear()} {siteData.name}.</p>
-    <div class="flex flex-wrap items-center gap-4">
-      <a href={siteData.githubUrl} target="_blank" rel="noreferrer" class="hover:text-ink">GitHub</a>
-      <a href={siteData.linkedinUrl} target="_blank" rel="noreferrer" class="hover:text-ink">LinkedIn</a>
-      {siteData.email && <a href={`mailto:${siteData.email}`} class="hover:text-ink">{siteData.email}</a>}
-      <a href={cvUrl} download class="font-semibold text-accent hover:underline">Download CV</a>
+<footer class={`footer${spaced ? ' mt72' : ''}`}>
+  <div class="container footer-inner">
+    <p>© 2026 samet kocbay · munich</p>
+    <div class="footer-links">
+      <a href={siteData.githubUrl}>github</a>
+      <a href={siteData.linkedinUrl}>linkedin</a>
+      <a href={`mailto:${siteData.email}`}>email</a>
+      {showCv && <a href={withBase(siteData.cvPath)} class="cv">cv.pdf ↓</a>}
     </div>
   </div>
 </footer>

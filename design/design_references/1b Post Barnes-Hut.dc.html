@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12;color:#e8eaf0;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#6ee7dc;text-decoration:none}
+a:hover{color:#8ff0e6}
+::selection{background:rgba(110,231,220,.25)}
+</style>
+</helmet>
+<nav style="position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(110,231,220,.14);background:rgba(11,13,18,.92);backdrop-filter:blur(10px)">
+  <div style="margin:0 auto;max-width:1280px;padding:0 40px;display:flex;height:60px;align-items:center;justify-content:space-between;gap:16px">
+    <a href="1b Home.dc.html" style="font:600 13px 'IBM Plex Mono',monospace;color:#e8eaf0;white-space:nowrap"><span style="color:#6ee7dc">~/</span>samet-kocbay</a>
+    <div style="display:flex;gap:26px;font:400 12.5px 'IBM Plex Mono',monospace">
+      <a href="1b Home.dc.html" style="color:#8b93a5">index</a>
+      <a href="1b Projects.dc.html" style="color:#8b93a5">projects</a>
+      <a href="1b Blog.dc.html" style="color:#6ee7dc">blog</a>
+      <a href="1b Home.dc.html#experience" style="color:#8b93a5">experience</a>
+    </div>
+    <a href="uploads/cv.pdf" style="font:500 11.5px 'IBM Plex Mono',monospace;border:1px solid rgba(110,231,220,.5);color:#6ee7dc;padding:7px 14px;border-radius:4px;white-space:nowrap" style-hover="background:rgba(110,231,220,.08)">cv.pdf ↓</a>
+  </div>
+</nav>
+<main style="margin:0 auto;max-width:860px;padding:0 40px 80px">
+  <p style="margin:48px 0 0;font:400 12px 'IBM Plex Mono',monospace;color:#465064"><a href="1b Blog.dc.html" style="color:#465064" style-hover="color:#6ee7dc">~/blog</a> <span style="color:#6ee7dc">/</span> barnes-hut-openmp-vs-mpi.md</p>
+  <header style="margin-top:28px;padding-bottom:32px;border-bottom:1px solid rgba(139,147,165,.22)">
+    <p style="margin:0;font:400 11px 'IBM Plex Mono',monospace;color:#6ee7dc">2026-05-02 · hpc</p>
+    <h1 style="margin:12px 0 0;font-size:42px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:#e8eaf0">Barnes–Hut in C++: OpenMP/AVX-512 vs MPI</h1>
+    <p style="margin:14px 0 0;font:400 14px/1.65 'IBM Plex Mono',monospace;color:#8b93a5">Two parallelization strategies for the same N-body solver — what shared memory buys you, where it stops scaling, and what distribution actually costs.</p>
+  </header>
+  <article style="font-size:15.5px;line-height:1.75;color:#b6bdcb">
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>The algorithm</h2>
+    <p style="margin:16px 0 0">Barnes–Hut reduces the O(N²) pairwise force sum to O(N log N) by clustering distant bodies: an octree partitions space, and any cell whose angular size falls below the opening criterion is treated as a single pseudo-particle at its center of mass,</p>
+    <div style="margin:16px 0 0;border:1px solid rgba(110,231,220,.25);border-radius:6px;background:#0e1524;padding:16px 22px;font:400 15px/1.9 'IBM Plex Mono',monospace;color:#6ee7dc;text-align:center;overflow-x:auto">s / d &lt; θ&nbsp;&nbsp;⟹&nbsp;&nbsp;accept cell as pseudo-particle</div>
+    <p style="margin:16px 0 0">Every implementation decision downstream is about one thing: the tree traversal has terrible memory-access patterns, and the force kernel is where all the flops are.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Shared memory: OpenMP + AVX-512</h2>
+    <p style="margin:16px 0 0">The shared-memory version builds the octree with <strong style="color:#e8eaf0">OpenMP tasks</strong> — each subtree beyond a cutoff depth becomes a task, which load-balances irregular particle distributions for free. The force kernel gathers accepted interaction partners into a flat buffer and evaluates them with <strong style="color:#e8eaf0">AVX-512 intrinsics</strong>: 8 doubles per lane, one rsqrt approximation plus a Newton iteration instead of a division and a square root.</p>
+    <p style="margin:16px 0 0">Two details mattered more than the vectorization itself:</p>
+    <ul style="margin:16px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:12px">
+      <li><strong style="color:#e8eaf0">Interaction-list batching.</strong> Traversing the tree per particle kills SIMD utilization; collecting the interaction list first and then sweeping it vectorized keeps the lanes full.</li>
+      <li><strong style="color:#e8eaf0">Morton-order sorting.</strong> Sorting bodies along a space-filling curve before the sweep makes neighboring particles hit the same cache lines — worth more than any intrinsic.</li>
+    </ul>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>Distributed memory: MPI</h2>
+    <p style="margin:16px 0 0">The MPI version decomposes the domain along the same <strong style="color:#e8eaf0">Morton curve</strong>: cut the sorted body array into P contiguous chunks and each rank owns a spatially compact region. Each rank builds its local tree, then exchanges only the <strong style="color:#e8eaf0">locally essential tree</strong> — the coarse cells other ranks need to satisfy the opening criterion from outside.</p>
+    <p style="margin:16px 0 0">The cost model flips: flops are cheap, the ghost-cell exchange is not. Overlapping the halo exchange with force evaluation on interior bodies (nonblocking <span style="font:400 13.5px 'IBM Plex Mono',monospace;color:#e8eaf0">MPI_Isend/Irecv</span>, compute, then finish the boundary) recovered most of the communication time.</p>
+    <h2 style="margin:44px 0 0;font-size:26px;font-weight:600;letter-spacing:-.01em;color:#e8eaf0"><span style="color:#6ee7dc;font:600 15px 'IBM Plex Mono',monospace;margin-right:10px">##</span>What actually won</h2>
+    <ul style="margin:16px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:12px">
+      <li>On a single node, the OpenMP/AVX-512 version is the clear winner — no communication, and the vectorized kernel keeps the cores fed.</li>
+      <li>MPI earns its complexity only past the node boundary; below it, domain decomposition is pure overhead.</li>
+      <li>The same Morton ordering serves both worlds: cache locality in shared memory, compact domains in distributed memory. If you take one thing from this post: sort your bodies.</li>
+    </ul>
+  </article>
+  <div style="margin-top:56px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(139,147,165,.22);padding-top:24px;font:400 12px 'IBM Plex Mono',monospace">
+    <a href="1b Blog.dc.html" style="color:#8b93a5" style-hover="color:#6ee7dc">← back to blog</a>
+  </div>
+</main>
+<footer style="border-top:1px solid rgba(110,231,220,.14)">
+  <div style="margin:0 auto;max-width:1280px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:400 12px 'IBM Plex Mono',monospace;color:#465064">
+    <p style="margin:0">© 2026 samet kocbay · munich</p>
+    <div style="display:flex;gap:20px">
+      <a href="https://github.com/sametkocbay" style="color:#465064" style-hover="color:#6ee7dc">github</a>
+      <a href="https://www.linkedin.com/in/samet-kocbay/" style="color:#465064" style-hover="color:#6ee7dc">linkedin</a>
+      <a href="mailto:samet.kocbay@tum.de" style="color:#465064" style-hover="color:#6ee7dc">email</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+</body>
+</html>

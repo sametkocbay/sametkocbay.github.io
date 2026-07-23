@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { withBase } from '../../utils/withBase';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+
+<BaseLayout title="Notes | Samet Kocbay" description="Working notes on scientific ML, numerics, and HPC — written as I go.">
+  <Navbar active="blog" />
+  <main class="container-narrow pb80">
+    <header class="page-head blog">
+      <p class="prompt">cat blog.log | sort -r</p>
+      <h1 class="page-title">Notes</h1>
+      <p class="page-sub sub-600">Working notes on scientific ML, numerics, and HPC — written as I go.</p>
+    </header>
+    <div class="post-rows">
+      {posts.map((post) => (
+        <a href={withBase(`/blog/${post.slug}/`)} class="post-row">
+          <span class="post-date">{post.data.date}</span>
+          <span>
+            <span class="post-title">{post.data.title}</span>
+            <span class="post-sum">{post.data.summary}</span>
+          </span>
+          <span class="post-tag">{post.data.tag}</span>
+        </a>
+      ))}
+    </div>
+    <p class="endlog">— end of log. —</p>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .sub-600 {
+    max-width: 600px;
+  }
+</style>
